@@ -164,8 +164,8 @@ MESSAGE_TAGS = {
 DEFAULT_FROM_EMAIL = 'noreply@tnp.nsutonline.in'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-EMAIL_HOST='smtp.sendgrid.net'
-EMAIL_HOST_USER='apikey'
+EMAIL_HOST=####
+EMAIL_HOST_USER=####
 EMAIL_HOST_PASSWORD = ###
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
