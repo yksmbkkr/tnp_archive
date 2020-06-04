@@ -1,0 +1,48 @@
+{%extends 'mdc.html'%}
+{%load static%}
+
+
+{%block body%}
+
+<div class="container">
+        <div class="section">
+            <div class="row  section-form">
+                {%include 's_err_msg.html'%}
+                <div class="col m6 offset-m3 s12 center-align">
+                    <div class="card card-panel">
+                        <div class="card-content">
+                            <div class="card-title"><h4 class="center-align cyan-text text-darken-4">Change Password</h4></div>
+                            <div class="row">
+                                <form class="col s12" method="post" action="">
+                                    <div class="input-field col s12">
+                                        {{form.old_password}}
+                                      <!--  <input id="last_name" type="text" class="validate"> -->
+                                        <label for="id_old_password">Old Password</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        {{form.new_password1}}
+                                      <!--  <input id="last_name" type="text" class="validate"> -->
+                                        <label for="id_new_password1">New Password</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        {{form.new_password2}}
+                                      <!--  <input id="last_name" type="text" class="validate"> -->
+                                        <label for="id_new_password2">Retype Password</label>
+                                    </div>
+                                    {%csrf_token%}
+                                    <div class="col s12">
+                                        <button class=" col s12 btn waves-effect waves-light z-depth-4" type="submit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                       
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}

@@ -1,0 +1,9 @@
+<form method="post" id='select-form'>
+    {% for field in form %}
+        <div class="form-group" id="select-input-div">
+            {{field.label_tag}}
+            {{field}}
+        </div>
+        {% csrf_token %}
+    {%endfor%}
+</form>

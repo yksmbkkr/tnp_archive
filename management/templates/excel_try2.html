@@ -1,0 +1,31 @@
+{%extends 'skeleton.html'%}
+
+{%block body%}
+<form method="post" enctype="multipart/form-data" name="myfile">
+    {% csrf_token %}
+    {{form.myfile}}
+    <button type="submit">Upload</button>
+  </form>
+<div>
+    {%if slist%}
+
+    <table>
+        <thead>
+            <tr>
+                <th>roll no</th>
+                <th>exception</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for s in slist%}
+            <tr>
+                <td>{{s.rollno}}</td>
+                <td>{{s.exception}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+    {%endif%}
+</div>
+{%endblock%}

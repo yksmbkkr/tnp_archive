@@ -1,0 +1,319 @@
+{%extends 'mdc.html'%}
+{%load static%}
+
+{%block head%}
+ <link rel="stylesheet" href="{%static 's_css/all_home.css'%}">
+{%endblock%}
+{%block body%}
+
+<div class="container container-wide" style="position:relative !important; height: 100% !important;">
+        <div class="container-blur"></div>
+       <div class="section">
+            <div class="carousel carousel-slider" data-indicator="true">
+                <a class="carousel-item" href="#one!"><img src="{% static 'img/1.png'%}"></a>
+                <a class="carousel-item" href="#two!"><img src="{% static 'img/2.png'%}"></a>
+                <a class="carousel-item" href="#three!"><img src="{% static 'img/3.png'%}"></a>
+            </div>
+            <div class="row">
+                <div class="col s12 m6">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">About Nsit</span>
+                      <img class="nsit-logo" src="{%static 'img/nsitlogo.png' %}">
+                      <p class="about-nsit">An Autonomous Institution under Govt. of NCT of Delhi and affiliated to University of Delhi, Netaji Subhas Institute of Technology is a seat of higher technical education in India. It was established in the year 1983 as Delhi Institute of Technology with the objective of meeting the growing demands of manpower in the emerging fields of engineering and technology with a close social and industrial interface. Over a period of time, the institute has carved a niche for itself, both nationally and internationally, for excellence in technical education and research.The institute has grown leaps and bounds since its inception, both in size and in the scope of its activities. The overall academic environment in the institution is highly conducive for achieving excellence in education and research. It has been consistently ranked as one of the top engineering colleges in India and has featured prominently in various national level surveys conducted by reputed professional and trade magazines.</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row recruiters-column">
+                <div class="blue-grey darken-1 col s12" style="margin-left: 0.75rem; width: 97.904%">
+                    <h2 class="recrutiers-heading">OUR PAST RECRUITERS</h2>
+                </div>
+                <div class="col s12">
+                    <div id="MyDivName" style="overflow: auto;
+                    background-color: white;
+                    width: 100%;
+                    height: 400px;
+                    padding: 20px 100px 20px 170px;
+                    border: 2px solid grey;
+                    margin: 0;" value="Pause" onMouseOver="pauseScroll()" onMouseOut="startScroll()">
+                        <table cellspacing="0">
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.ajprecisionautomation.com" target="_blank"><img src="{% static 'img/logos/ajpa.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.accenture.com/" target="_blank"><img src="{% static 'img/logos/accenture.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.adobe.com/" target="_blank"><img src="{% static 'img/logos/adobe.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.agilent.com/" target="_blank"><img src="{% static 'img/logos/agilent.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.agnity.com/" target="_blank"><img src="{% static 'img/logos/agnity.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.atfoods.com/" target="_blank"><img src="{% static 'img/logos/agrotech.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://india.amazon.com/" target="_blank"><img src="{% static 'img/logos/amazon.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.amdocs.com/absi/" target="_blank"><img src="{% static 'img/logos/amdocs.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://home.americanexpress.com/home/mt_personal.shtml" target="_blank"><img src="{% static 'img/logos/americanexpress.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://analineartech.com" target="_blank"><img src="{% static 'img/logos/analinear.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.aricent.com/index.aspx" target="_blank"><img src="{% static 'img/logos/aricent.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.ashokleyland.com/group_companies.jsp?name=group" target="_blank"><img src="{% static 'img/logos/ashokleyland.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.aspiringminds.in" target="_blank"><img src="{% static 'img/logos/aspiringminds.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.atrenta.com/" target="_blank"><img src="{% static 'img/logos/atrenta.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.avaya.com/" target="_blank"><img src="{% static 'img/logos/avaya.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://axtria.com/" target="blank"><img src="{% static 'img/logos/axtria.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "https://www.bakerhughesdirect.com" target="_blank"><img src="{% static 'img/logos/bakerhughes.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.bain.com/bcc/default.asp" target="_blank"><img src="{% static 'img/logos/bain.jpg'%}"></a></td>
+                        </tr>
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.bechtel.com/" target="_blank"><img src="{% static 'img/logos/bechtel.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.belzabar.com" target="_blank"><img src="{% static 'img/logos/belzabar.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.bhel.com/" target="_blank"><img src="{% static 'img/logos/bhel.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.birlasoft.com/" target="_blank"><img src="{% static 'img/logos/birlasoft.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.boeing.co.in/" target="_blank"><img src="{% static 'img/logos/boeing.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.careerlauncher.com/" target="_blank"><img src="{% static 'img/logos/cl.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.ciena.com/" target="_blank"><img src="{% static 'img/logos/ciena.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.cisco.com/" target="_blank"><img src="{% static 'img/logos/cisco.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.cosmiccircuits.com/" target="_blank"><img src="{% static 'img/logos/cosmic.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.cscmediworld.com/" target="_blank"><img src="{% static 'img/logos/csc.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.deshawindia.com" target="_blank"><img src="{% static 'img/logos/deshaw.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.deloitte.com/" target="_blank"><img src="{% static 'img/logos/deloitte.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.digitalgreen.org/" target="_blank"><img src="{% static 'img/logos/digitalgreen.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.drdo.com/" target="_blank"><img src="{% static 'img/logos/defence.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.dunnhumby.com/in/" target="_blank"><img src="{% static 'img/logos/dunnhumby.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.educomp.com" target="_blank"><img src="{% static 'img/logos/educomp.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://engineersindia.com/" target="_blank"><img src="{% static 'img/logos/eil.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.embconsulting.co.uk/about/" target="_blank"><img src="{% static 'img/logos/emb.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.evalueserve.com/" target="_blank"><img src="{% static 'img/logos/evalueserve.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.exlservice.com/" target="_blank"><img src="{% static 'img/logos/exl.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.fiitjee.com/" target="_blank"><img src="{% static 'img/logos/fiitjee.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.fiserv.com/" target="_blank"><img src="{% static 'img/logos/fiserv.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.freescale.com/in/" target="_blank"><img src="{% static 'img/logos/freescale.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.futuresfirst.in/" target="_blank"><img src="{% static 'img/logos/futurefirst.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.gemalto.com/" target="_blank"><img src="{% static 'img/logos/gemalto.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.genband.com/" target="_blank"><img src="{% static 'img/logos/genband.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.globallogic.com/" target="_blank"><img src="{% static 'img/logos/globallogic.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.google.com/" target="_blank"><img src="{% static 'img/logos/google.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.grailresearch.com/" target="_blank"><img src="{% static 'img/logos/gr.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.gsconst.co.kr/english" target="_blank"><img src="{% static 'img/logos/gs.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.halliburton.com/" target="_blank"><img src="{% static 'img/logos/halliburton.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.hcl.in/" target="_blank"><img src="{% static 'img/logos/hcl.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.herohonda.com/" target="_blank"><img src="{% static 'img/logos/herohonda.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.hlsasia.com/" target="_blank"><img src="{% static 'img/logos/hls.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "https://www.honda.com/" target="_blank"><img src="{% static 'img/logos/honda.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www51.honeywell.com/honeywell/" target="_blank"><img src="{% static 'img/logos/honeywell.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.htmedia.in/" target="_blank"><img src="{% static 'img/logos/htmedia.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.huawei.com/" target="_blank"><img src="{% static 'img/logos/image1.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.ibibo.com/" target="_blank"><img src="{% static 'img/logos/ibibo.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.ibm.com/in/en/" target="_blank"><img src="{% static 'img/logos/ibm.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.coachfederation.org/" target="_blank"><img src="{% static 'img/logos/icf.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.inductis.com/" target="_blank"><img src="{% static 'img/logos/inductis.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.indusvalleypartners.com/" target="_blank"><img src="{% static 'img/logos/indus.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.infogain.com/" target="_blank"><img src="{% static 'img/logos/infogain.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.informatica.com/" target="_blank"><img src="{% static 'img/logos/informatica.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"></td>
+                        <td width="30%" align="left"><a href= "http://www.infosys.com/" target="_blank"><img src="{% static 'img/logos/infosys.jpg'%}"></a></td>
+                        <td width="30%" align="left"></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.iocl.com/" target="_blank"><img src="{% static 'img/logos/indianoil.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.ivpindia.com/" target="_blank"><img src="{% static 'img/logos/ivp.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.jaypeeindia.com" target="_blank"><img src="{% static 'img/logos/jaypee.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.jpmorgan.com/pages/jpmorgan" target="_blank"><img src="{% static 'img/logos/jpmorgan.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.in.kpmg.com/home/home.asp" target="_blank"><img src="{% static 'img/logos/kpmg.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.kritikalsolutions.com." target="_blank"><img src="{% static 'img/logos/kritikal.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.lakshyainstitute.com/" target="_blank"><img src="{% static 'img/logos/lakshya.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.libsysinc.com" target="_blank"><img src="{% static 'img/logos/libsys.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.techmahindra.com/index.htm" target="_blank"><img src="{% static 'img/logos/mahindra.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.makemytrip.co.in/" target="_blank"><img src="{% static 'img/logos/makemytrip.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.marutiudyog.com/" target="_blank"><img src="{% static 'img/logos/maruti.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.mckinsey.com/" target="_blank"><img src="{% static 'img/logos/mckinsey.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.pixtelmtk.com/" target="_blank"><img src="{% static 'img/logos/m.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.microsoft.com" target="_blank"><img src="{% static 'img/logos/microsoft.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.mobicules.com/" target="_blank"><img src="{% static 'img/logos/mobicules.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.mobisolv.com/" target="_blank"><img src="{% static 'img/logos/mobisolv.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.motorola.com/" target="_blank"><img src="{% static 'img/logos/motorola.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.mtree.org/about.html" target="_blank"><img src="{% static 'img/logos/mtree.jpg'%}"></a></td>
+                        </tr>
+
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.mu-sigma.com" target="_blank"><img src="{% static 'img/logos/musigma.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.nagarro.com/" target="_blank"><img src="{% static 'img/logos/nagarro.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.ni.com/" target="_blank"><img src="{% static 'img/logos/nationalinstruments.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.neibearing.com/about-us.htm" target="_blank"><img src="{% static 'img/logos/nbc.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.nomura.com/asia/" target="_blank"><img src="{% static 'img/logos/nomura.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.nsysinc.com/" target="_blank"><img src="{% static 'img/logos/sys.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://laptop.org/en/" target="_blank"><img src="{% static 'img/logos/image2.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://one97world.com/" target="_blank"><img src="{% static 'img/logos/one.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.truthatonida.com/beta/products/telsub.asp?cat=9" target="_blank"><img src="{% static 'img/logos/onida.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.oracle.com/" target="_blank"><img src="{% static 'img/logos/oracle.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.elitmus.com/" target="_blank"><img src="{% static 'img/logos/elitmus.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.pb.com/" target="_blank"><img src="{% static 'img/logos/pitneybowes.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.q3tech.com/" target="_blank"><img src="{% static 'img/logos/q3.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.rcom.co.in/" target="_blank"><img src="{% static 'img/logos/reliance.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.samsungindiasoft.com/" target="_blank"><img src="{% static 'img/logos/samsung.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.sapient.com/" target="_blank"><img src="{% static 'img/logos/sapient.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.slb.com/" target="_blank"><img src="{% static 'img/logos/schlumberger.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.servigistics.com" target="_blank"><img src="{% static 'img/logos/servigistics.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.shilpicables.com/" target="_blank"><img src="{% static 'img/logos/shilpi.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.skec.com" target="_blank"><img src="{% static 'img/logos/sk.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.solidcore.com/" target="_blank"><img src="{% static 'img/logos/solidcore.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.stericsson.com/home/home.jsp" target="_blank"><img src="{% static 'img/logos/ericsson.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.st.com/" target="_blank"><img src="{% static 'img/logos/st.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.st.com/stonline/" target="_blank"><img src="{% static 'img/logos/stm.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.ttconsultants.co.in/" target="_blank"><img src="{% static 'img/logos/talwar.jpg'%}" width="150" height="80"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.tavant.com/" target="_blank"><img src="{% static 'img/logos/tavant.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.tcil.com/" target="_blank"><img src="{% static 'img/logos/til.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.tcs.com/" target="_blank"><img src="{% static 'img/logos/tata.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.techmahindra.com/index.htm" target="_blank"><img src="{% static 'img/logos/mtechmahindra.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.technip.com/" target="_blank"><img src="{% static 'img/logos/technip.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.tejasnetworks.com/" target="_blank"><img src="{% static 'img/logos/tejas.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.ti.com/" target="_blank"><img src="{% static 'img/logos/texas.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.cypressgp.com/" target="_blank"><img src="{% static 'img/logos/cypress.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.thesmartcube.com/" target="_blank"><img src="{% static 'img/logos/thesmartcube.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.thermaxindia.com/v2/index.asp" target="_blank"><img src="{% static 'img/logos/thermax.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.towerswatson.com/ " target="_blank"><img src="{% static 'img/logos/towers.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.toyotabharat.com" target="_blank"><img src="{% static 'img/logos/toyota.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.trai.gov.in/" target="_blank"><img src="{% static 'img/logos/telecom.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.vedantaresources.com/" target="_blank"><img src="{% static 'img/logos/vedanta.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.verizonbusiness.com/" target="_blank"><img src="{% static 'img/logos/verizon.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.versata.com/" target="_blank"><img src="{% static 'img/logos/versata.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.vnl.in/" target="_blank"><img src="{% static 'img/logos/vnl.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.towerswatson.com/ " target="_blank"><img src="{% static 'img/logos/watson.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.winshuttle.com/" target="_blank"><img src="{% static 'img/logos/winshuttle.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.wipro.com/" target="_blank"><img src="{% static 'img/logos/wipro.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.wiprocorporate.com/" target="_blank"><img src="{% static 'img/logos/wiprocorporate.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://in.yahoo.com" target="_blank"><img src="{% static 'img/logos/yahoo.jpg'%}"></a></td>
+                        <td width="30%" align="left"><a href= "http://www.zsassociates.com" target="_blank"><img src="{% static 'img/logos/zs.jpg'%}"></a></td>
+                        </tr>
+
+                        <tr>
+                        <td width="30%" align="left"><a href= "http://www.zte.com.cn/cn/" target="_blank"><img src="{% static 'img/logos/zte.jpg'%}"></a></td>
+                        <td width="30%" align="left"></td>
+                        </tr>
+                        </table>
+                    </div>
+                </div>
+            
+            </div>
+            
+        </div>
+    </div>
+
+{%endblock%}
+

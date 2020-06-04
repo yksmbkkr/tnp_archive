@@ -1,0 +1,32 @@
+{%load static%}
+{%if messages%}
+{%autoescape off%}
+<div class="col m6 offset-m3 s12 center-align">
+      {%for message in messages%}
+                    <div id="card-alert" class="card {{message.tags}}">
+                        <div class="card-content white-text">
+                            <p>{{message}}</p>
+                        </div>
+                    </div>
+     {%endfor%}
+                </div>
+{%endautoescape%}
+{%endif%}
+{%if form.errors%}
+
+<div class="col m6 offset-m3 s12 center-align">
+                    <div id="card-alert" class="card red">
+                        <div class="card-content white-text">
+                            {%for field in form%}
+                            <ul>
+    {%for error in field.errors%}
+    <li>{{field.name}} : {{error}}</li> 
+    {%endfor%}
+</ul>
+                            {%endfor%}
+                        </div>
+                    </div>
+                </div>
+
+
+{%endif%}

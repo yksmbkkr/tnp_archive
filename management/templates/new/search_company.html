@@ -1,0 +1,102 @@
+{% extends 'new/skeleton.html' %}
+
+{%block body%}
+<div class="container-fluid">
+    <div class="row">
+        {%for message in messages%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto">
+        
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+       
+            </div>
+        {%endfor%}
+
+        {%if form.errors%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">        
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 {{form.errors}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>       
+            </div>
+        {%endif%}
+
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">
+            <h4>Search Company : </h4>
+            <form method="post">
+                {% for field in form %}
+                <div class="form-group">
+                        <div class="form-label-group">
+                            {{field}}
+                        </div>
+                    </div>
+                {%endfor%}
+                {%csrf_token%}
+                <button class="btn btn-primary btn-block" type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="col-md-10 col-sm-12 ml-auto mr-auto mt-4">
+
+           <div class="card shadow mb-4">
+               <div class="card-header py-3">
+                   <h5 class="m-0 font-weight-bold text-primary">Search Results</h5>
+               </div>
+               <div class="card-body">                    
+                    {%if clist%}
+                    <p>{{smsg}}</p>
+                    <div class="row">
+                        <dic class="col-sm-12 mr-auto ml-auto">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Company Name</th>
+                                            <th>For Batch</th>
+                                             <th>CTC</th>
+                                            <th>Grade</th>
+                                            <th>Cut-off</th>
+                                            <th>Branches</th>
+                                            <th>Closing Date</th>
+                                            <th>Cap</th>
+                                            <th>Registration Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                         {%for c in clist%}
+                                        <tr>
+                                             <th><a href="/management/edit_company/{{c.id}}">{{c.name}}</a></th>
+                                             <td>{{c.for_batch}}</td>
+                                            <td>{{c.ctc}}</td>
+                                            <td >{{c.grade}}</td>
+                                            <td>{{c.cutoff}}</td>
+                                            <td>{{c.branch_allowed.all|join:"  "}}</td>
+                                            <td>{{c.closing_date}}</td>
+                                            <td>{{c.cap}}</td>
+                                            <td>{{c.open_reg|yesno:"Enabled,Disabled"}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </dic>
+                        <div class="col-sm-12 col-md-6 ml-auto mr-auto">
+                            <button id="customXLSButton" class="btn btn-lg btn-block btn-primary">Download List</button>
+                        </div>
+                    </div>
+                    {%else%}
+                    <p class="small">No results found !</p>
+                    {%endif%}
+               </div>
+           </div>
+        </div> 
+    </div>
+</div>
+{%endblock%}

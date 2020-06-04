@@ -1,0 +1,90 @@
+{%extends 'skeleton.html'%}
+
+{%block body%}
+<div class="bootstrap-iso">
+         <div class="container-fluid">
+          <div class="row">
+           <div class="col-md-6 col-sm-6 col-xs-12">
+{%if form.errors%}
+{%for field in form%}
+<ul>
+    {%for error in field.errors%}
+    <li>{{error}}</li>
+    {%endfor%}
+</ul>
+{%endfor%}
+{%endif%}
+{%if messages%}
+{%for message in messages%}
+{{message}}
+{%endfor%}
+{%endif%}
+               <h3 class="title">Proceed for Ban on roll number {{rollno}}</h3>
+<form class="form-horizontal" method="post" action=""> 
+
+                
+               <div class="form-group ">
+                  <label class="control-label col-sm-2" for="id_field1">
+                   {{form.field1.label}}
+                  </label>
+                  <div class="col-sm-10 input-group datepicker" data-provide="datepicker">
+                   {{form.field1}}
+                  </div>
+                 </div>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <p>Leave empty for ban for all time.</p>
+                    </div>
+                </div>
+
+             <div class="form-group ">
+              <label class="control-label col-sm-2" for="id_field2">
+               {{form.field2.label}}
+              </label>
+              <div class="col-sm-10">
+               {{form.field2}}
+              </div>
+             </div>
+           <div class="form-group">
+                    <div class="col-sm-10">
+                        <p>Leave empty for ban on sitting in any company.</p>
+                    </div>
+                </div>
+    <h4>Ban for a number of upcoming companies - </h4>
+    <div class="form-group ">
+              <label class="control-label col-sm-2" for="id_field3">
+               {{form.field3.label}}
+              </label>
+              <div class="col-sm-10">
+               {{form.field3}}
+              </div>
+             </div>
+        <div class="form-group">
+                    <div class="col-sm-10">
+                        <p>If filling this field leave previous 2 empty.</p>
+                    </div>
+                </div>
+            
+           
+    {% csrf_token %}
+            <div class="btn-group submit-btn" role="group" aria-label="...">
+                <button type="submit" class="btn btn-default">Ban</button>
+            </div>
+        
+    </form>
+
+        </div>
+              </div>
+             </div>
+    </div>
+{%endblock%}
+
+{%block extrascripts%}
+<script>
+  
+  $( function() {
+    $( "#id_field1" ).datepicker();
+  } );
+  </script>
+
+{%endblock%}

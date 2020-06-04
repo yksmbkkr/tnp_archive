@@ -1,0 +1,69 @@
+{%load static%}
+<!doctype html>
+<html>
+{%block head%}
+    <head>
+        {%include 'head.html'%}
+    </head>
+{%endblock%}
+    <body>
+<!--        page header starts-->
+        <div class="page-header"> 
+            <h1>Training And Placement Portal</h1>
+        </div>
+<!--        page header ends-->
+        
+<!--        nav bar starts-->
+        {%include 'nav.html'%}
+<!--        nav bar ends-->
+        {%block body%}
+        <div class="row row1">
+            <div class="col-xs-4">
+                <div class="thumbnail">
+                    <img src="{% static 'Photos Home Page/Total.png'%}" alt="Total Placed">
+                    <div class="caption">
+                        <h3>{{pcount}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="thumbnail">
+                    <img src="{% static 'Photos Home Page/Number.png'%}" alt="Number Of Companies">
+                    <div class="caption">
+                        <h3>{{ccount}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row row2">
+            <div class="col-xs-2">
+                <div class="thumbnail">
+                    <img src="{% static 'Photos Home Page/Dream.png'%}" alt="Dream Companies">
+                    <div class="caption">
+                        <h3>{{drmccount}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="thumbnail">
+                    <img src="{% static 'Photos Home Page/A++.png'%}" alt="A++ Companies">
+                    <div class="caption">
+                        <h3>{{appccount}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="thumbnail">
+                    <img src="{% static 'Photos Home Page/A.png'%}" alt="A Companies">
+                    <div class="caption">
+                        <h3>{{account}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endblock%}
+        {%include 'scripts.html'%}
+        {%block extrascripts%}
+        {%endblock%}
+    </body>
+</html>

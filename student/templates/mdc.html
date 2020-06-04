@@ -1,0 +1,184 @@
+{%load static%}
+{% load app_filters%}
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   {%include 's_head.html'%}
+    {%block head%}
+    {%endblock%}
+</head>
+<body style="background-image:url({%static 'bg.jpg'%}); background-size:cover; background-attachment: fixed;">
+    <header>
+      <div class="navbar-fixed">
+          <ul id="why-nsit-dropdown" class="dropdown-content">
+                <li><a href="{%url 'student:history_s'%}">History</a></li>
+                <li><a href="{%url 'student:students_s'%}">Student</a></li>
+                <li><a href="{%url 'student:faculty_s'%}">Faculty &amp; Research</a></li>
+                <li><a href="{%url 'student:alumni_s'%}">Alumni</a></li>
+                <li><a href="{%url 'student:courses_s'%}">Courses Offered</a></li>
+           </ul>
+          <ul id="why-nsit-dropdown-m" class="dropdown-content">
+               <li><a href="{%url 'student:history_s'%}">History</a></li>
+                <li><a href="{%url 'student:students_s'%}">Student</a></li>
+                <li><a href="{%url 'student:faculty_s'%}">Faculty &amp; Research</a></li>
+                <li><a href="{%url 'student:alumni_s'%}">Alumni</a></li>
+                <li><a href="{%url 'student:courses_s'%}">Courses Offered</a></li>
+           </ul>
+          <ul id="placement-dropdown" class="dropdown-content">
+                <li><a href="{%url 'student:procedure_s'%}">Procedure</a></li>
+                <li><a href="{%url 'student:policy_s'%}">Policy</a></li>
+           </ul>
+          <ul id="placement-dropdown-m" class="dropdown-content">
+                <li><a href="{%url 'student:procedure_s'%}">Procedure</a></li>
+                <li><a href="{%url 'student:policy_s'%}">Policy</a></li>
+           </ul>
+          {%if user.is_authenticated%}
+          <ul id="account-dropdown" class="dropdown-content">
+                <li><a href="{%url 'student:s_home'%}">Apply</a></li>
+                <li><a href="{%url 'student:my_reg'%}">My Registrations</a></li>
+                <li><a href="{%url 'student:s_resume'%}">Resume Drive</a></li>
+                <li><a href="{%url 'student:s_profile'%}">Profile</a></li>
+                <li><a href="{%url 'student:s_change_pass'%}">Change Password</a></li>
+           </ul>
+          {%endif%}
+           <nav class="cyan darken-4" role="navigation">
+                <div class="nav-wrapper container"><div id="logo-container" class="brand-logo">
+                {%if user.is_authenticated%}
+                    {{user|get_top_placement}}
+                {% else %}
+                    TNP Portal
+                {% endif%}
+                 </div>
+                    <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        {%if user.managers%}
+                        <li><a href="{%url 'management:m_home'%}">Management Dashboard</a></li>
+                        {%endif%}
+                        <li><a href="{%url 'student:all_home'%}">Home</a></li>
+                        <li><a class="dropdown-trigger" href="#!" data-target="why-nsit-dropdown">Why NSIT<i class="material-icons right">arrow_drop_down</i></a></li>
+                        <li><a class="dropdown-trigger" href="#!" data-target="placement-dropdown">Placement<i class="material-icons right">arrow_drop_down</i></a></li>
+                        {%if user.is_authenticated%}
+                        <li><a class="dropdown-trigger" href="#!" data-target="account-dropdown">Account<i class="material-icons right">arrow_drop_down</i></a></li>
+                        <li><a href="{%url 'student:s_logout'%}">Logout</a></li>
+                        {%else%}
+                         <li><a href="{%url 'student:s_activation'%}">Activate</a></li>
+                        <li><a href="{%url 'student:s_login'%}">Login</a></li>
+                        <li><a href="{%url 'student:contact_us'%}">Contact Us</a></li>
+                        {%endif%}
+                    </ul>      
+                </div>
+            </nav>
+        </div>
+    <ul id="nav-mobile" class="sidenav">
+                        {%if user.managers%}
+                        <li><a href="{%url 'management:m_home'%}">Management Dashboard</a></li>
+                        {%endif%}
+            <li><a href="{%url 'student:all_home'%}">Home</a></li>
+        <li><a class="dropdown-trigger" href="#!" data-target="why-nsit-dropdown-m">Why NSIT<i class="material-icons right">arrow_drop_down</i></a></li>
+         <li><a class="dropdown-trigger" href="#!" data-target="placement-dropdown-m">Placement<i class="material-icons right">arrow_drop_down</i></a></li>
+                       
+         {%if user.is_authenticated%}
+            <li><a href="{%url 'student:s_home'%}">Apply</a></li>
+            <li><a href="{%url 'student:my_reg'%}">My Registrations</a></li>
+            <li><a href="{%url 'student:s_profile'%}">Profile</a></li>
+            <li><a href="{%url 'student:s_resume'%}">Resume Drive</a></li>
+            <li><a href="{%url 'student:s_change_pass'%}">Change Password</a></li>
+            <li><a href="{%url 'student:s_logout'%}">Logout</a></li>
+        {%else%}
+            <li><a href="{%url 'student:s_activation'%}">Activate</a></li>
+            <li><a href="{%url 'student:s_login'%}">Login</a></li>
+        <li><a href="{%url 'student:contact_us'%}">Contact Us</a></li>
+         {%endif%}
+      </ul>
+        </header>
+    <main>
+    {%block body%}
+    
+    <div class="container">
+        <div class="section">
+            <div class="row  section-form">
+                <div class="col m6 offset-m3 s12 center-align">
+                    <div class="card card-panel">
+                        <div class="card-content">
+                            <div class="card-title"><h4 class="center-align cyan-text text-darken-4">Activate</h4></div>
+                            <div class="row">
+                                <form class="col s12">
+                                    <div class="input-field col s12">
+                                        <input id="last_name" type="text" class="validate">
+                                        <label for="last_name">Last Name</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <select>
+  <option value="" disabled selected>Select Branch</option>
+
+  <option value="1">BT</option>
+
+  <option value="2">ECE</option>
+
+  <option value="3">ICE</option>
+
+  <option value="4">IT</option>
+
+  <option value="5">COE</option>
+
+  <option value="6">ME</option>
+
+  <option value="7">MPAE</option>
+
+</select>
+                                      <!--  <input id="last_name" type="text" class="validate"> -->
+                                        
+                                    </div>
+                                    <div class="col s12">
+                                       
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="card-action">
+                            <div class="row">
+                                <div class="col s12 l6 pad-top" >
+                                    <button class=" col s12 btn waves-effect waves-light z-depth-4">Login</button>
+                                </div>
+                                <div class="col s12 l6 pad-top">
+                                    <button class=" col s12 btn waves-effect waves-light z-depth-4">Forgot Password</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {%endblock%}
+        </main>
+  <footer class="page-footer teal darken-4" style="padding-top:2px !important;">
+      <div class="container">
+          <div class="row" style="margin-bottom:1px !important;">
+              <div class="col s12">
+                  <p class="center-align p-mar">&copy; 2018 Copyright | Created by <a href="https://www.linkedin.com/in/ankitagarwal6899"><u><b>Ankit Agarwal</b></u></a> &amp; <a href="https://www.linkedin.com/in/yksmbkkr"><u><b>Yash Kulshreshtha</b></u></a></p>
+              </div>
+          </div>
+      </div>
+    
+  </footer>
+
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.2/aos.js"></script>
+    <script src="{%static 's_js/init.js'%}"></script>
+    <script>
+        AOS.init({
+            duration: 1200,
+            })
+    </script>
+    {%block scripts%}
+    {%endblock%}
+</body>
+</html>

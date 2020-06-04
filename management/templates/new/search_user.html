@@ -1,0 +1,152 @@
+{% extends 'new/skeleton.html' %}
+
+{%block body%}
+<div class="container-fluid">
+    <div class="row">
+        {%for message in messages%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto">
+        
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+       
+            </div>
+        {%endfor%}
+
+        {%if form.errors%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">        
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 {{form.errors}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>       
+            </div>
+        {%endif%}
+
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">
+            <h4>Search User : </h4>
+            <form method="post">
+                {% for field in form %}
+                <div class="form-group">
+                        <div class="form-label-group">
+                             {%if field.name == 'branch'%} <label>Branches</label>{%endif%}
+                            {{field}}
+                            {%if field.name == 'slug'%} <p>Leave this field empty to get whole list with or without filters.</p>{%endif%}
+                            {%if field.name == 'batch'%}<p>Leave filter field empty for the filters which you don't wish to apply</p>{%endif%}
+                        </div>
+                    </div>
+                {%endfor%}
+                {%csrf_token%}
+                <button class="btn btn-primary btn-block" type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="col-md-10 col-sm-12 ml-auto mr-auto mt-4">
+
+           <div class="card shadow mb-4">
+               <div class="card-header py-3">
+                   <h5 class="m-0 font-weight-bold text-primary">Search Results</h5>
+               </div>
+               <div class="card-body">                    
+                    {%if clist%}
+                    <p>{{smsg}}</p>
+                    <div class="row">
+                        <dic class="col-sm-12 mr-auto ml-auto">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Roll No</th>
+                                            <th>Batch</th>
+                                            <th>Branch</th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>Alternate Mobile</th>
+                                            <th>CGPA</th>
+                                            <th>CGPA with drop</th>
+                                            <th>Sem 1</th>
+                                            <th>Sem 2</th>
+                                            <th>Sem 3</th>
+                                            <th>Sem 4</th>
+                                            <th>Sem 5</th>
+                                            <th>Sem 6</th>
+                                            <th>Backlogs</th>
+                                            <th>12th marks</th>
+                                             <th>12th passing year</th>
+                                             <th>10th marks</th>
+                                            <th>10th passing year</th>
+                                            <th>Company of Internship</th>
+                                            <th>Gender</th>
+                                            <th>Category</th>
+                                            <th>Father's Name</th>
+                                             <th>Father's Occupation</th>
+                                             <th>Mother's Name</th>
+                                            <th>Mother's Occupation</th>
+                                            <th>Present Address</th>
+                                            <th>Permanent Address</th>
+                                            <th>Dream</th>
+                                            <th>A++</th>
+                                            <th>A+</th>
+                                            <th>A</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                         {%for c in clist%}
+                                        <tr>
+                                             <th><a href="{%url 'management:modify_user' c.p.user.id%}">{{c.p.f_name}}&nbsp;{{c.p.l_name}}</a></th>
+                                            <td>{{c.p.roll_no}}</td>
+                                            <td >{{c.p.batch.name}}</td>
+                                            <td >{{c.p.branch}}</td>
+                                            <td>{{c.p.user.email}}</td>
+                                            <td>{{c.p.mobile}}</td>
+                                            <td>{{c.p.alternate_mobile}}</td>
+                                            <td>{{c.p.be_marks}}</td>
+                                            <td>{{c.p.cgpa_drop}}</td>
+                                            <td>{{c.p.sem1}}</td>
+                                            <td>{{c.p.sem2}}</td>
+                                            <td>{{c.p.sem3}}</td>
+                                            <td>{{c.p.sem4}}</td>
+                                            <td>{{c.p.sem5}}</td>
+                                            <td>{{c.p.sem6}}</td>
+                                            <td>{{c.p.backlogs}}</td>
+                                            <td>{{c.p.marks_12}}</td>
+                                            <td>{{c.p.passing_year_12}}</td>
+                                            <td>{{c.p.marks_11}}</td>
+                                            <td>{{c.p.passing_year_10}}</td>
+                                            <td>{{c.p.intern_company}}</td>
+                                            <td>{{c.p.gender}}</td>
+                                            <td>{{c.p.category}}</td>
+                                            <td>{{c.p.father}}</td>
+                                            <td>{{c.p.father_occupation}}</td>
+                                            <td>{{c.p.mother}}</td>
+                                            <td>{{c.p.mother_occupation}}</td>
+                                            <td>{{c.p.address}}</td>
+                                            <td>{{c.p.permanent_address}}</td>
+                                            <td>{{c.dream}}</td>
+                                            <td>{{c.app}}</td>
+                                            <td>{{c.ap}}</td>
+                                            <td>{{c.a}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </dic>
+                        <div class="col-sm-12 col-md-6 ml-auto mr-auto">
+                            <button id="customXLSButton" class="btn btn-lg btn-block btn-primary">Download List</button>
+                        </div>
+                    </div>
+                    {%else%}
+                    <p class="small">No results found !</p>
+                    {%endif%}
+               </div>
+           </div>
+        </div> 
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,87 @@
+{% extends 'new/skeleton2.html' %}
+
+{% load static %}
+
+{%block body%}
+<div class="container-fluid">
+    <div class="row">
+        {%for message in messages%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto">
+        
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+       
+            </div>
+        {%endfor%}
+
+        {%if form.errors%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">        
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 {{form.errors}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>       
+            </div>
+        {%endif%}
+
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">
+            <h4>Student Database : </h4>
+            <form method="post" enctype="multipart/form-data">
+                {% for field in form %}
+                <div class="form-group">
+                        <div class="form-label-group">
+                            {{field}}
+                        </div>
+                    </div>
+                {%endfor%}
+                {%csrf_token%}
+                <button class="btn btn-primary btn-block" type="submit">Upload</button>
+            </form>
+        </div>
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Follow this format for excel sheet (In case of data of MTech put Mtech Aggregate in Sem 6 field and Btech Aggregate in CGPA field.)</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr>
+                       <td>Roll Number</td>
+                       <td>Email</td>
+                       <td>Sem 1</td>
+                       <td>Sem 2</td>
+                       <td>Sem 3</td>
+                       <td>Sem 4</td>
+                       <td>Sem 5</td>
+                       <td>Sem 6</td>
+                       <td>CGPA</td>
+                       <td>Batch</td>
+                        <td>Backlogs</td>
+                   </tr>
+                   <tr>
+                       <td>2016UAB1234</td>
+                       <td>example@example.com</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>2020</td>
+                       <td>1</td>
+
+                   </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+

@@ -1,0 +1,37 @@
+<nav class="box">
+            <ul class="nav nav-pills nav-stacked">
+                {%if user.is_authenticated %}
+                <li role="presentation" class="{{home_nav}}" ><a href="{%url 'management:m_home'%}">Home</a></li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="{{add_user}}"><a href="{%url 'management:add_user'%}">Add User</a></li> 
+                <li role="separator" class="divider"></li>
+                 <li role="presentation" class="{{std_db}}"><a href="{%url 'management:student_db'%}">Add Student DB</a></li> 
+{#                <li role="separator" class="divider"></li>#}
+{#                <li role="presentation" class="{{add_admin}}"><a href="{%url 'management:add_manager'%}">Add Admin</a></li>#}
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="{{s_user}}"><a href="{%url 'management:search_user'%}">Search User</a></li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="{{ban}}"><a href="{%url 'management:ban_select'%}">Ban User</a></li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="{{add_company}}"><a href="{%url 'management:add_company'%}">Add company</a></li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="{{s_comp}}"><a href="{%url 'management:search_company'%}">Search Company</a></li> 
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="{{r_download}}"><a href="{%url 'management:r_downloader'%}">Download Resume</a></li>  
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="{{add_p}}"><a href="{%url 'management:add_placement'%}">Add Placement</a></li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="{{v_reg}}"><a href="{%url 'management:view_reg'%}">View Registrations</a></li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="{{mod_pass_nav}}"><a href="{%url 'management:mod_pass'%}">Change Password</a></li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class=""><a href="{%url 'management:logout'%}">Logout</a></li>
+                <li role="separator" class="divider"></li>
+                {%else%}
+                <li role="presentation" class="{{log_nav_active}}"><a href="{%url 'management:login'%}">Login</a></li>
+                <li role="separator" class="divider"></li>
+                <li role="presentation" class="{{pswd_nav_active}}"><a href="{%url 'student:s_forgot_pass'%}">Forgot Password</a></li>
+                <li role="separator" class="divider"></li>
+                {%endif%}
+            </ul>
+        </nav>

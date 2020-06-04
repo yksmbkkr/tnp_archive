@@ -1,0 +1,3 @@
+{% for usr in usrs %}
+<option value="{{ usr.pk }}">{{ usr.user.username }} ( {{ usr.user.student_profile.f_name }} {{ usr.user.student_profile.l_name }} )</option>
+{% endfor %}

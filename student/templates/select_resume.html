@@ -1,0 +1,40 @@
+{%extends 'mdc.html'%}
+{%load static%}
+
+
+{%block body%}
+
+<div class="container container-wide" style="position:relative !important; height: 100% !important;">
+      
+        <div class="section">
+            {%include 's_err_msg.html'%}
+            <div class="row">
+               
+                <div class="col l8 m10  s12 offset-l2 offset-m1">
+                    
+                      <div class="card card-panel padding-1">
+                          <h4 class="title center-align">Select Resume</h4>
+                    <h5 class="center-align">which you want to use with this company</h5>
+                          <div class="card-content padding-1">
+                              <!--<div class="l10 m12 s12 offset-l1"></div>-->
+                              <div class="row">
+                                  <div class="col s12 padding-1">
+                                      <a class=" col s12 btn btn-large waves-effect waves-light z-depth-1" href="{%url 'student:s_p_reg' cid 1 %}">Resume 1 - {{usr.resume_drive.resume1.name}}</a>
+                                   </div>
+                                  <div class="col s12 padding-1">
+                                      <a class=" col s12 btn btn-large waves-effect waves-light z-depth-1" href="{%url 'student:s_p_reg' cid 2 %}">Resume 2 - {{usr.resume_drive.resume2.name}}</a>
+                                       </div>
+                                  <div class="col s12 padding-1">
+                                      <a class=" col s12 btn btn-large waves-effect waves-light z-depth-1" href="{%url 'student:s_p_reg' cid 3 %}">Resume 3 - {{usr.resume_drive.resume3.name}}</a>
+                                  </div>
+                              </div>
+                             
+                          </div>
+                      </div>s
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}
+

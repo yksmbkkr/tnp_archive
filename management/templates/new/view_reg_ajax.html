@@ -1,0 +1,279 @@
+{% extends 'new/skeleton2.html' %}
+
+{%block body%}
+<div class="container-fluid">
+    <div class="row">
+        {%for message in messages%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto">
+        
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+       
+            </div>
+        {%endfor%}
+
+        {%if form.errors%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">        
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 {{form.errors}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>       
+            </div>
+        {%endif%}
+
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">
+            <h4>Search Registrations : </h4>
+            <form method="post">
+                {% for field in form %}
+                <div class="form-group">
+                        <div class="form-label-group">
+                            {{field}}
+                        </div>
+                    </div>
+                {%endfor%}
+                {%csrf_token%}
+                <button class="btn btn-primary btn-block" type="submit">Search</button>
+            </form>
+        </div>
+        <form id="reg_list" method="post">
+            {{ hidden_form }}
+            {% csrf_token %}
+        </form>
+
+        <div class="col-md-10 col-sm-12 ml-auto mr-auto mt-4">
+
+           <div class="card shadow mb-4">
+               <div class="card-header py-3">
+                   <h5 id="search_result_txt" class="m-0 font-weight-bold text-primary">Search Results &nbsp;</h5>
+               </div>
+               <div class="card-body">                    
+                    {%if clist%}
+                    <h6 class="font-weight-bold">{%autoescape off%}{{smsg}}{% endautoescape %}</h6>
+                    <div class="row">
+                        <dic class="col-sm-12 mr-auto ml-auto">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Roll No</th>
+                                            <th>Batch</th>
+                                            <th>Branch</th>
+                                            <th>Company</th>
+                                            <th>Placement Status</th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>Alternate Mobile</th>
+                                            <th>CGPA</th>
+                                            <th>CGPA with drop</th>
+                                            <th>Semester 1</th>
+                                            <th>Semester 2</th>
+                                            <th>Semester 3</th>
+                                            <th>Semester 4</th>
+                                            <th>Semester 5</th>
+                                            <th>Semester 6</th>
+                                            <th>Backlogs</th>
+                                            <th>12th marks</th>
+                                            <th>12th passing year</th>
+                                            <th>10th marks</th>
+                                            <th>10th passing year</th>
+                                            <th>Company of Internship</th>
+                                            <th>Gender</th>
+                                            <th>Category</th>
+                                            <th>Father's Name</th>
+                                             <th>Father's Occupation</th>
+                                             <th>Mother's Name</th>
+                                            <th>Mother's Occupation</th>
+                                            <th>Present Address</th>
+                                            <th>Permanent Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reg_data_list">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </dic>
+                        <div class="col-sm-12 col-md-6 ml-auto mr-auto">
+                            <button id="customXLSButton" class="btn btn-lg btn-block btn-primary">Download List</button>
+                        </div>
+                    </div>
+                    {%else%}
+                    <p class="small">No results found !</p>
+                    {%endif%}
+               </div>
+           </div>
+        </div> 
+    </div>
+</div>
+{%endblock%}
+
+{% block script %}
+    <script>
+        $(document).ready(function() {
+            {% autoescape off %}
+                let check_len = {{ clist_len }};
+                if (check_len < 1){
+                    return;
+                }
+            $('#search_result_txt').append('<span id="search_result_txt_span"> (   <i class="fas fa-cog fa-spin"></i> Loading...)</span>');
+
+                let reg_list = {{ clist }};
+                let ajax_counter = 0;
+                let len_limit = 500;
+                let total = reg_list.length;
+                console.log(total);
+                let k = Math.floor(total/len_limit);
+                let remainder = total%len_limit;
+                let startIdx = 0;
+                let endIdx = 0;
+                if(total > len_limit){
+                    for(let i=0; i<k; i++){
+                        console.log('round '+i.toString());
+                        startIdx = endIdx;
+                        endIdx = endIdx + len_limit;
+                        let reg_list_slice = reg_list.slice(startIdx,endIdx);
+                        document.getElementById('{{ hidden_form.rList.id_for_label }}').value = JSON.stringify(reg_list_slice);
+                        let formObj = $('#reg_list');
+                        $.ajax({
+                            beforeSend : function(){
+                              ajax_counter+=1;
+                              console.log('ajax '+i.toString());
+                            },
+                            complete : function(){
+                              ajax_counter-=1;
+                              if (ajax_counter == 0){
+
+                                  console.log("loop data table fired");
+                                  download_button_activate();
+                                  $('#dataTable').DataTable({
+                                        fixedColumns: true,
+                                    });
+                                $('#search_result_txt_span').remove();
+                                download_button_activate();
+                              }
+                            },
+                            data: formObj.serialize(),
+                            type: formObj.attr('method'),
+                            url: '{% url 'management:get_reg_ajax' %}',
+                            success: function(data,status) {
+                                if (data.status == 200){
+                                    $('.dataTables_empty').remove();
+                                    $('#reg_data_list').append(data.html_data);
+                                    console.log("loop data recieved");
+                                } else {
+                                    alert(data.msg);
+                                }
+
+                            },
+                            error: function (data,status) {
+                                alert('Something went wrong.');
+                            }
+
+                        });
+                        console.log('loop end');
+                    }
+                    if (total-endIdx > 0){
+                        console.log('if fired');
+                        let reg_list_slice = reg_list.slice(endIdx,total);
+                        document.getElementById('{{ hidden_form.rList.id_for_label }}').value = JSON.stringify(reg_list_slice);
+                        let formObj = $('#reg_list');
+                        $.ajax({
+                            beforeSend : function(){
+                              ajax_counter+=1;
+                              console.log('ajax if');
+                            },
+                            complete : function(){
+                              ajax_counter-=1;
+                              if (ajax_counter == 0){
+                                  console.log("if data table fired");
+                                  download_button_activate();
+                                  $('#dataTable').DataTable({
+                                        fixedColumns: true,
+                                    });
+                                $('#search_result_txt_span').remove();
+
+                              }
+                            },
+                            data: formObj.serialize(),
+                            type: formObj.attr('method'),
+                            url: '{% url 'management:get_reg_ajax' %}',
+                            success: function(data,status) {
+                                if (data.status == 200){
+                                    console.log("if data recieved");
+                                    $('.dataTables_empty').remove();
+                                    $('#reg_data_list').append(data.html_data);
+                                } else {
+                                    alert(data.msg);
+                                }
+                            },
+                            error: function (data,status) {
+                                alert('Something went wrong.');
+                            }
+                        });
+                                                console.log('if end');
+
+                    }
+
+                } else {
+                    document.getElementById('{{ hidden_form.rList.id_for_label }}').value = JSON.stringify(reg_list);
+                    let formObj = $('#reg_list');
+                    $.ajax({
+                        data: formObj.serialize(),
+                        type: formObj.attr('method'),
+                        url: '{% url 'management:get_reg_ajax' %}',
+                        success: function(data,status) {
+                            console.log(status);
+                            if (data.status == 200){
+                                $('.dataTables_empty').remove();
+                                $('#reg_data_list').append(data.html_data);
+                                download_button_activate();
+                                $('#dataTable').DataTable({
+                                    fixedColumns: true,
+                                });
+                                $('#search_result_txt_span').remove();
+                            } else {
+                                alert(data.msg);
+                            }
+                        },
+                        error: function (data,status) {
+                            alert('Something went wrong.');
+                        }
+                    });
+                }
+            {% endautoescape %}
+        });
+
+        function download_button_activate(){
+            var tableId = 'dataTable';
+    var ExportButtons = document.getElementById(tableId);
+    var instance = new TableExport(ExportButtons, {
+        formats: ['xlsx'],
+        exportButtons: false
+    });
+    // **** jQuery **************************
+    //    $(ExportButtons).tableExport({
+    //        formats: ['xls'],
+    //        exportButtons: false
+    //    });
+    // **************************************
+    var XLSX = instance.CONSTANTS.FORMAT.XLSX;
+    //                                          // "id"  // format
+    var exportDataXLSX = instance.getExportData()[tableId]['xlsx'];
+    // get filesize
+    var bytesXLSX = instance.getFileSize(exportDataXLSX.data, exportDataXLSX.fileExtension);
+    console.log('filesize (XLSX):', bytesXLSX + 'B');
+    var XLSbutton = document.getElementById('customXLSButton');
+    XLSbutton.addEventListener('click', function (e) {
+        //                   // data             // mime                 // name                 // extension
+        instance.export2file(exportDataXLSX.data, exportDataXLSX.mimeType, exportDataXLSX.filename, exportDataXLSX.fileExtension);
+    });
+        }
+    </script>
+{% endblock %}

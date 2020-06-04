@@ -1,0 +1,51 @@
+{%extends 'mdc.html'%}
+{%load static%}
+
+{%block head%}
+ <link rel="stylesheet" href="{%static 's_css/additional_style.css'%}">
+{%endblock%}
+{%block body%}
+
+<div class="container container-wide" style="position:relative !important; height: 100% !important;">
+        <div class="container-blur"></div>
+       <div class="section">
+           <div class="row">
+                <div class="col s12 m6">
+                  <div class="custom-color card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <span class="card-title">Contact</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col s12 m6">
+                  <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                      <p class="brief-history">Working Force</p>
+                      <p class="brief-history">Faculty Incharge:</p>
+<!--                      <p class="history-data">The faculty at NSIT is highly qualified and have made ever lasting impressions in many fields research oriented activities. Our distinguished faculty is highly committed towards delivering not only knowledge but are actively involved in a various national and international decision- making bodies, exercising their social responsibilities.</p>-->
+                      <p class="history-data policy-rules" style="padding: 0.75rem 0">Prof. M.P.S. Bhatia<br />
+                        Prof-in-Charge,<br />
+                        Training and Placement Department,<br />
+                        213, 2nd Floor, Administractive Block,<br />
+                        NSIT,New Delhi-110045<br/>
+                        +91-11-25099021<br />
+                        placements@nsitonline.in<br />
+                        placements@nsit.ac.in</p>
+                      <p class="history-data policy-rules" style="padding: 0.75rem 0">Mr. Rajesh Rawat<br />
+                        Assistant Coordinator<br/>
+                        +91-9810472670<br /></p>
+                      <p class="brief-history">The following student body works under Prof. Bhatia and Mr. Rawat:</p>
+                        {% for member in memberList %}
+                      <p class="history-data policy-rules" style="margin-bottom:5px; padding-bottom:5px;"><b class="alumni-name" style="color: white; font-weight: 400;">{{ member }}</b></p>
+                        {% endfor %}
+                        <br><br>
+                      <h4 class="card-title" style="text-decoration: none; font-size: 25px; text-transform: none;">Post your queries at <a href="mailto:tnpcell@nsitonline.in" style="color: white;margin-left: 0.75rem; text-transform: none;">tnpcell@nsitonline.in</a></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+        </div>
+    </div>
+
+{%endblock%}

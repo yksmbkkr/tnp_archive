@@ -1,0 +1,151 @@
+{%extends 'mdc.html'%}
+{%load static%}
+{% load app_filters %}
+
+{%block body%}
+
+<div class="container container-wide" style="position:relative !important; height: 100% !important;">
+        <div class="container-blur"></div>
+        <div class="section">
+            {%include 's_err_msg.html'%}
+            <div class="row">
+                <div class="hide-on-small-only">
+                <div class="col l3 m4">
+                    <div class="card-panel">
+                        <div class="card-content">
+                            <h5 class="header">
+                                Order By
+                            </h5>
+                            <div class="collection">
+                                <a href="?orderby=name" class="collection-item {{name_order}}">Name</a>
+                                <a href="?orderby=cutoff" class="collection-item {{cut_off_order}}">Cut Off</a>
+                                <a href="?orderby=lastdate" class="collection-item {{last_date_order}}">Last Date</a>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="hide-on-med-and-up">
+                    <div class="col s12">
+                       <a class='dropdown-trigger btn col s12' href='#' data-target='oby'>Order By</a>
+                        <ul id='oby' class='dropdown-content'>
+                             <li><a href="?orderby=name">Name</a></li>
+                             <li><a href="?orderby=cutoff">Cut Off</a></li>
+                            <li><a href="?orderby=lastdate">Last Date</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col l9 m8 s12">
+                    <div class="card card-panel padding-1" data-aos="slide-up">
+                        <div class="card-content padding-1">
+                            <div class="row">
+                                <div class="col s12">
+                                   <form class="col s12" method="post" action="{%url 'student:s_home'%}">
+                                       <div class="row margin-1">
+                                           <div class="input-field col m10 s12">
+                                               <i class="material-icons prefix">search</i>
+                                               <input id="id_slug" type="text" class="validate" name="slug">
+                                               <label for="id_slug">Search by Branch or Name</label>
+                                           </div>
+                                           <div class="col m2 s6 offset-s3">
+                                               <button class=" col s12 btn btn-large waves-effect waves-light z-depth-1" type="submit">Search</button>
+                                           </div>
+                                           {%csrf_token%}
+                                       </div>
+                                   </form>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {%for c in clist%}
+                    <div class="card card-panel padding-1" data-aos="slide-up">
+                        <div class="card-content padding-1">
+                            <div class="row">
+                                <div class="col s12">
+                                    <h5 class="header center-align">{{c.name}}</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6">
+                                        <div class="col s12">
+                                            <h6 class="left-align">Branches Allowed</h6>
+                                        </div>
+                                        <div class="col s12">
+                                            <h6 class="left-align">{{c.branch_allowed.all|join:"  "}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="col s12">
+                                            <h6 class="right-align">Cut Off</h6>
+                                        </div>
+                                        <div class="col s12">
+                                            <h6 class="right-align">{{c.cutoff}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s6">
+                                        <div class="col s12">
+                                            <h6 class="left-align">Grade</h6>
+                                        </div>
+                                        <div class="col s12">
+                                            <h6 class="left-align">{% if c.for_batch.name == 'Placement' %}{{c.grade.grade_name}}{% else %}Not Applicable{%endif%}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="col s12">
+                                            <h6 class="right-align">CTC</h6>
+                                        </div>
+                                        <div class="col s12">
+                                            <h6 class="right-align">{{c|get_ctc_lac}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if zero <= c.cap %}
+                                <div class="col s12">
+                                    <h5 class="center-align">Cap: {{c|get_cap_lac}}</h5>
+                                </div>
+                                {%endif%}
+                                <div class="col s12">
+                                    <h6 class="center-align">Last Date: {{c.closing_date}}</h6>
+                                </div><div class="col s12">
+                                    <h6 class="center-align">Backlogs Allowed: {{c.backlogs_allowed}}</h6>
+                                </div>
+
+                                {% if c in user|get_reg_list %}
+                                <div class="col s12">
+                                    <a class="btn col s12 m6 offset-m3 red darken-4" href="{%url 'student:my_reg' %}" >Deregister</a>
+                                </div>
+                                {% elif c.open_reg and user.is_authenticated and user.student_profile.branch.branchType.name == 'MTECH' and user.student_profile.backlogs <= c.backlogs_allowed and date <= c.closing_date and user.student_profile.branch in c.branch_allowed.all %}
+                                <div class="col s12">
+                                    <a class="btn col s12 m6 offset-m3" href="{%url 'student:company_reg' c.id %}" >Register</a>
+                                </div>
+                                {% elif c.open_reg and user.is_authenticated and user.student_profile.be_marks >= c.cutoff and user.student_profile.backlogs <= c.backlogs_allowed and date <= c.closing_date and user.student_profile.branch in c.branch_allowed.all %}
+                                <div class="col s12">
+                                    <a class="btn col s12 m6 offset-m3" href="{%url 'student:company_reg' c.id %}" >Register</a>
+                                </div>
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                    {%endfor%}
+                    {%if not clist%}
+                     <div class="card card-panel padding-1" data-aos="slide-up">
+                        <div class="card-content padding-1">
+                            <div class="row">
+                                <div class="col s12">
+                                    <h5 class="header center-align">No Results Found</h5>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}
+

@@ -1,0 +1,71 @@
+{%extends 'mdc.html'%}
+{%load static%}
+
+
+{%block body%}
+
+<div class="container container-wide" style="position:relative !important; height: 100% !important;">
+      
+        <div class="section">
+            {%include 's_err_msg.html'%}
+            <div class="row">
+               
+                <div class="col l8 m10  s12 offset-l2 offset-m1">
+                    
+                      <div class="card card-panel padding-1">
+                          <h4 class="title center-align">Resume Manager</h4>
+                          <div class="card-content padding-1">
+                              <!--<div class="l10 m12 s12 offset-l1"></div>-->
+                              <form action="" method="post" enctype="multipart/form-data">
+                                  <div class="row">
+                                      <div class="col l10 m12 s12 offset-l1">
+                                <div class="file-field input-field">
+                                  <div class="btn">
+                                    <span>Resume 1</span>
+                                    <!--<input type="file">-->
+                                      {{form.resume1}}
+                                  </div>
+                                  <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                  </div>
+                                </div>
+                                          </div>
+                                       <div class="col l10 m12 s12 offset-l1">
+                                    <div class="file-field input-field">
+                                  <div class="btn">
+                                    <span>Resume 2</span>
+                                     <!--<input type="file">-->
+                                      {{form.resume2}}
+                                  </div>
+                                  <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                  </div>
+                                </div>
+                                            </div>
+                                       <div class="col l10 m12 s12 offset-l1">
+                                    <div class="file-field input-field">
+                                  <div class="btn">
+                                    <span>Resume 3</span>
+                                     <!--<input type="file">-->
+                                      {{form.resume3}}
+                                  </div>
+                                  <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                  </div>
+                                </div>
+                                      </div>
+                                      {%csrf_token%}
+                                       <div class="col m6 s10 offset-s1 offset-m3">
+                                               <button class=" col s12 btn btn-large waves-effect waves-light z-depth-1" type="submit">Save</button>
+                                           </div>
+                                      </div>
+                              </form>
+                          </div>
+                      </div>s
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}
+

@@ -1,0 +1,173 @@
+{%extends 'skeleton.html'%}
+
+{%block head%}
+{%include 'head.html'%}
+{%include 'search_company_head.html'%} 
+{%endblock%}
+
+
+{%block body%}
+
+<div class="bootstrap-iso">
+         <div class="container-fluid">
+          <div class="row">
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {%if form.errors%}
+{%for field in form%}
+<ul>
+    {%for error in field.errors%}
+    <li>{{field.name}} : {{error}}</li>
+    {%endfor%}
+</ul>
+{%endfor%}
+{%endif%}
+            <form class="form-horizontal" method="post">
+             <div class="form-group ">
+              <label class="control-label col-sm-2" for="i_slug">
+               Search For
+              </label>
+              <div class="col-sm-10">
+               {{form.slug}}
+              </div>
+             </div>
+             <div class="form-group ">
+              <label class="control-label col-sm-2" for="id_field_type">
+               Search By
+              </label>
+              <div class="col-sm-10">
+               {{form.field_choice}}
+              </div>
+             </div>
+                {%csrf_token%}
+             <div class="form-group">
+              <div class="col-sm-10 col-sm-offset-2">
+               <button class="btn btn-default " name="submit" type="submit">
+                Submit
+               </button>
+              </div>
+             </div>
+            </form>
+               
+                   {%if messages%}
+               
+{%for message in messages%}
+<h3 class="title">{{message}}</h3>
+{%endfor%}
+
+{%endif%}
+               
+           </div>
+          
+             {%if clist%}
+            
+                <div class="col-md-10 ml-2">
+                    
+
+<div>
+            <h3 class="title">{{smsg}}</h3>
+            <table id="query-table" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Company Name</th>
+                        <th scope="col">For Batch</th>
+                         <th scope="col">CTC</th>
+                        <th scope="col">Grade</th>
+                        <th scope="col">Cut-off</th>
+                        <th scope="col">Branches</th>
+                        <th scope="col">Closing Date</th>
+                        <th scope="col">Cap</th>
+                        <th scope="col">Registration Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for c in clist%}
+                    <tr>
+                        <th scope="row"><a href="/management/edit_company/{{c.id}}">{{c.name}}</a></th>
+                         <td>{{c.for_batch}}</td>
+                        <td>{{c.ctc}}</td>
+                        <td >{{c.grade}}</td>
+                        <td>{{c.cutoff}}</td>
+                        <td>{{c.branch_allowed.all|join:"  "}}</td>
+                        <td>{{c.closing_date}}</td>
+                        <td>{{c.cap}}</td>
+                        <td>{{c.open_reg|yesno:"Enabled,Disabled"}}</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+
+</div>
+                     <div class="col-md-10 col-md-offset-1">
+                  
+        <button id="customXLSButton" class="btn btn-lg btn-block btn-green">Download</button>
+
+              </div>
+                    <div class="col-md-10 col-md-offset-1 text-center">
+                            {% if clist.has_other_pages %}
+  <ul class="pagination">
+    {% if clist.has_previous %}
+      <li><a href="?page={{ clist.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in clist.paginator.page_range %}
+      {% if clist.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if clist.has_next %}
+      <li><a href="?page={{ clist.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+                    </div>
+
+
+                </div>
+             
+            </div>
+             {%endif%}
+         </div>
+        </div>
+
+
+{%endblock%}
+
+{%block extrascripts%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.1/xlsx.core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blob-polyfill/2.0.20171115/Blob.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/5.0.2/js/tableexport.min.js"></script>
+<script>
+    var tableId = 'query-table';
+    var ExportButtons = document.getElementById(tableId);
+    var instance = new TableExport(ExportButtons, {
+        formats: ['xlsx'],
+        exportButtons: false
+    });
+    // **** jQuery **************************
+    //    $(ExportButtons).tableExport({
+    //        formats: ['xls'],
+    //        exportButtons: false
+    //    });
+    // **************************************
+    var XLSX = instance.CONSTANTS.FORMAT.XLSX;
+    //                                          // "id"  // format
+    var exportDataXLSX = instance.getExportData()[tableId][XLSX];
+    // get filesize
+    var bytesXLSX = instance.getFileSize(exportDataXLSX.data, exportDataXLSX.fileExtension);
+    console.log('filesize (XLSX):', bytesXLSX + 'B');
+    var XLSbutton = document.getElementById('customXLSButton');
+    XLSbutton.addEventListener('click', function (e) {
+        //                   // data             // mime                 // name                 // extension
+        instance.export2file(exportDataXLSX.data, exportDataXLSX.mimeType, exportDataXLSX.filename, exportDataXLSX.fileExtension);
+    });
+</script>
+
+
+
+{%endblock%}

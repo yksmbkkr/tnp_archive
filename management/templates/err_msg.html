@@ -1,0 +1,15 @@
+ 
+{%if form.errors%}
+{%for field in form%}
+<ul>
+    {%for error in field.errors%}
+    <li>{{field.name}} : {{error}}</li> 
+    {%endfor%}
+</ul>
+{%endfor%}
+{%endif%}
+{%if messages%}
+{%for message in messages%}
+{{message}}
+{%endfor%}
+{%endif%}

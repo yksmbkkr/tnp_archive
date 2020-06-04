@@ -1,0 +1,77 @@
+{%extends 'skeleton.html'%}
+
+{%block head%}
+{%include 'head.html'%}
+{%include 'search_company_head.html'%} 
+<style>
+    td { 
+    padding: 10px !important;
+}
+</style>
+{%endblock%}
+
+
+{%block body%}
+
+<div class="bootstrap-iso">
+         <div class="container-fluid">
+          <div class="row">
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {%if form.errors%}
+{%for field in form%}
+<ul>
+    {%for error in field.errors%}
+    <li>{{field.name}} : {{error}}</li>
+    {%endfor%}
+</ul>
+{%endfor%}
+{%endif%}
+          <form method="post" enctype="multipart/form-data" name="myfile">
+    {% csrf_token %}
+    {{form.myfile}}
+    <button type="submit">Upload</button>
+  </form>
+               
+                   {%if messages%}
+               
+{%for message in messages%}
+<h4 class="title">{{message}}</h4>
+{%endfor%}
+
+{%endif%}
+               <h5><b>Recommended Excel Format</b></h5>
+               <table border="1">
+                   <tr>
+                       <td>Roll Number</td>
+                       <td>Email</td>
+                       <td>Sem 1</td>
+                       <td>Sem 2</td>
+                       <td>Sem 3</td>
+                       <td>Sem 4</td>
+                       <td>Sem 5</td>
+                       <td>Sem 6</td>
+                       <td>CGPA</td>
+                       <td>Batch</td>
+                   </tr>
+                   <tr>
+                       <td>2016UAB1234</td>
+                       <td>example@example.com</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>9.9</td>
+                       <td>2020</td>
+
+                   </tr>
+               </table>
+               <h4><b>1<sup>st</sup> row should be header</b></h4>
+           </div>
+         </div>
+        </div>
+    </div>
+
+
+{%endblock%}

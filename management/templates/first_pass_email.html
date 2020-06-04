@@ -1,0 +1,18 @@
+{% autoescape off %}
+Hey there,
+
+TNP Portal account for you is created.
+
+Usrname : {{ user.get_username }}
+
+click the link below to set your password and activate account:
+
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+
+If clicking the link above doesn't work, please copy and paste the URL in a new browser 
+window instead.
+
+Sincerely,
+
+TNP Team
+{% endautoescape %}

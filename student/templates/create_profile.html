@@ -1,0 +1,99 @@
+{%extends 'mdc.html'%}
+{%load static%}
+
+
+{%block body%}
+
+<div class="container">
+        <div class="section">
+            <div class="row">
+                {%include 's_err_msg.html'%}
+                <div class="col m8 offset-m2 s12 center-align">
+                    <div class="card card-panel">
+                        <div class="card-content">
+                            <div class="card-title"><h4 class="center-align cyan-text text-darken-4">Profile</h4></div>
+                            <div class="row">
+                                <form class="col s12" method="post" action="">
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{user.username.upper}}" id="roll_no" type="text" class="validate" />
+                                        <label for="roll_no">Roll Number</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{user.email}}" id="roll_no" type="email" class="validate" />
+                                        <label for="roll_no">Email</label>
+                                    </div>
+                                    {%if request.user.profile_set.check %}
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.batch.year}}" id="batch" type="text" class="validate" />
+                                        <label for="roll_no">Batch</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.branch.name}}" id="branch" type="text" class="validate" />
+                                        <label for="roll_no">Branch</label>
+                                    </div>
+                                     <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.be_marks}}" id="cgpa" type="text" class="validate" />
+                                        <label for="roll_no">Btech Aggr. CGPA</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.sem1}}" id="sem1" type="text" class="validate" />
+                                        <label for="roll_no">Sem 1<sup>st</sup> CGPA</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.sem2}}" id="sem2" type="text" class="validate" />
+                                        <label for="roll_no">Sem 2<sup>nd</sup> CGPA</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.sem3}}" id="sem3" type="text" class="validate" />
+                                        <label for="roll_no">Sem 3<sup>rd</sup> CGPA</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.sem4}}" id="sem4" type="text" class="validate" />
+                                        <label for="roll_no">Sem 4<sup>th</sup> CGPA</label>
+                                    </div>
+                                    {% endif %}
+                                    {%if request.user.profile_set.check and request.user.student_profile.branch.branchType.name == 'BE'%}
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.sem5}}" id="sem5" type="text" class="validate" />
+                                        <label for="roll_no">Sem 5<sup>th</sup> CGPA</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.sem6}}" id="sem6" type="text" class="validate" />
+                                        <label for="roll_no">Sem 6<sup>th</sup> CGPA</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.backlogs}}" id="backlogs" type="text" class="validate" />
+                                        <label for="roll_no">Backlogs</label>
+                                    </div>
+                                        {% elif request.user.profile_set.check and request.user.student_profile.branch.branchType.name == 'MTECH' %}
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.sem6}}" id="sem6" type="text" class="validate" />
+                                        <label for="roll_no">MTech Aggr. CGPA</label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <input disabled value="{{request.user.student_profile.backlogs}}" id="backlogs" type="text" class="validate" />
+                                        <label for="roll_no">Backlogs</label>
+                                    </div>
+                                    {%endif%}
+                                    {% for field in form %}
+                                        <div class="input-field col s12">
+                                            {{ field }}
+                                            {{ field.label_tag }}
+                                        </div>
+                                {% endfor %}
+                                    {%csrf_token%}
+                                    <div class="col s12">
+                                        <button class=" col s12 btn waves-effect waves-light z-depth-4" type="submit">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}

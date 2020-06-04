@@ -1,0 +1,62 @@
+{%extends 'skeleton.html'%}
+
+{%block head%}
+{%include 'head.html'%}
+{%include 'search_company_head.html'%} 
+{%endblock%}
+
+
+{%block body%}
+
+<div class="bootstrap-iso">
+         <div class="container-fluid">
+          <div class="row">
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {%if form.errors%}
+{%for field in form%}
+<ul>
+    {%for error in field.errors%}
+    <li>{{field.name}} : {{error}}</li>
+    {%endfor%}
+</ul>
+{%endfor%}
+{%endif%}
+            <form class="form-horizontal" method="post">
+             <div class="form-group ">
+              <label class="control-label col-sm-2" for="i_slug">
+               Registration Number
+              </label>
+              <div class="col-sm-10">
+               {{form.rid}}
+              </div>
+             </div>
+                {%csrf_token%}
+             <div class="form-group">
+              <div class="col-sm-10 col-sm-offset-2">
+               <button class="btn btn-default " name="submit" type="submit">
+                Submit
+               </button>
+              </div>
+             </div>
+            </form>
+               
+                   {%if messages%}
+               
+{%for message in messages%}
+<h3 class="title">{{message}}</h3>
+{%endfor%}
+
+{%endif%}
+               
+           </div>
+          
+             
+            
+             
+             
+            </div>
+         </div>
+        </div>
+
+
+{%endblock%}

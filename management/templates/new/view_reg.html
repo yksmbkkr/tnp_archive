@@ -1,0 +1,145 @@
+{% extends 'new/skeleton.html' %}
+
+{%block body%}
+<div class="container-fluid">
+    <div class="row">
+        {%for message in messages%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto">
+        
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+       
+            </div>
+        {%endfor%}
+
+        {%if form.errors%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">        
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 {{form.errors}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>       
+            </div>
+        {%endif%}
+
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">
+            <h4>Search Registrations : </h4>
+            <form method="post">
+                {% for field in form %}
+                <div class="form-group">
+                        <div class="form-label-group">
+                            {{field}}
+                        </div>
+                    </div>
+                {%endfor%}
+                {%csrf_token%}
+                <button class="btn btn-primary btn-block" type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="col-md-10 col-sm-12 ml-auto mr-auto mt-4">
+
+           <div class="card shadow mb-4">
+               <div class="card-header py-3">
+                   <h5 class="m-0 font-weight-bold text-primary">Search Results</h5>
+               </div>
+               <div class="card-body">                    
+                    {%if clist%}
+                    <h6 class="font-weight-bold">{%autoescape off%}{{smsg}}{% endautoescape %}</h6>
+                    <div class="row">
+                        <dic class="col-sm-12 mr-auto ml-auto">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Roll No</th>
+                                            <th>Batch</th>
+                                            <th>Branch</th>
+                                            <th>Company</th>
+                                            <th>Placement Status</th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>Alternate Mobile</th>
+                                            <th>CGPA</th>
+                                            <th>CGPA with drop</th>
+                                            <th>Semester 1</th>
+                                            <th>Semester 2</th>
+                                            <th>Semester 3</th>
+                                            <th>Semester 4</th>
+                                            <th>Semester 5</th>
+                                            <th>Semester 6</th>
+                                            <th>Backlogs</th>
+                                            <th>12th marks</th>
+                                            <th>12th passing year</th>
+                                            <th>10th marks</th>
+                                            <th>10th passing year</th>
+                                            <th>Company of Internship</th>
+                                            <th>Gender</th>
+                                            <th>Category</th>
+                                            <th>Father's Name</th>
+                                             <th>Father's Occupation</th>
+                                             <th>Mother's Name</th>
+                                            <th>Mother's Occupation</th>
+                                            <th>Present Address</th>
+                                            <th>Permanent Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                         {%for c in clist%}
+                                        <tr>
+                                              <th>{{c.user.student_profile.f_name}}&nbsp;{{c.user.student_profile.l_name}}</th>
+                                                <td >{{c.user.username}}</td>
+                                                 <td>{{c.user.student_profile.batch.name}}</td>
+                                                <td>{{c.user.student_profile.branch}}</td>
+                                                 <td>{{c.company.name}}</td>
+                                                <td>{{c.placed|yesno:"Yes,No"}}</td>
+                                               <td>{{c.user.student_profile.user.email}}</td>
+                                                <td>{{c.user.student_profile.mobile}}</td>
+                                                <td>{{c.user.student_profile.alternate_mobile}}</td>
+                                                <td>{{c.user.student_profile.be_marks}}</td>
+                                                <td>{{c.user.student_profile.cgpa_drop}}</td>
+                                                <td>{{c.user.student_profile.sem1}}</td>
+                                                <td>{{c.user.student_profile.sem2}}</td>
+                                                <td>{{c.user.student_profile.sem3}}</td>
+                                                <td>{{c.user.student_profile.sem4}}</td>
+                                                <td>{{c.user.student_profile.sem5}}</td>
+                                                <td>{{c.user.student_profile.sem6}}</td>
+                                                <td>{{c.user.student_profile.backlogs}}</td>
+                                                <td>{{c.user.student_profile.marks_12}}</td>
+                                                <td>{{c.user.student_profile.passing_year_12}}</td>
+                                                <td>{{c.user.student_profile.marks_11}}</td>
+                                                <td>{{c.user.student_profile.passing_year_10}}</td>
+                                                <td>{{c.user.student_profile.intern_company}}</td>
+                                                <td>{{c.user.student_profile.gender}}</td>
+                                                <td>{{c.user.student_profile.category}}</td>
+                                                <td>{{c.user.student_profile.father}}</td>
+                                                <td>{{c.user.student_profile.father_occupation}}</td>
+                                                <td>{{c.user.student_profile.mother}}</td>
+                                                <td>{{c.user.student_profile.mother_occupation}}</td>
+                                                <td>{{c.user.student_profile.address}}</td>
+                                                <td>{{c.user.student_profile.permanent_address}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </dic>
+                        <div class="col-sm-12 col-md-6 ml-auto mr-auto">
+                            <button id="customXLSButton" class="btn btn-lg btn-block btn-primary">Download List</button>
+                        </div>
+                    </div>
+                    {%else%}
+                    <p class="small">No results found !</p>
+                    {%endif%}
+               </div>
+           </div>
+        </div> 
+    </div>
+</div>
+{%endblock%}

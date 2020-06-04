@@ -1,0 +1,142 @@
+{%extends 'skeleton.html'%}
+
+{%block body%}
+
+<div class="bootstrap-iso">
+            <div class="container-fluid">
+              <div class="row">
+                  {%if form.errors%}
+{%for field in form%}
+<ul>
+    {%for error in field.errors%}
+    <li>{{field.name}} : {{error}}</li>
+    {%endfor%}
+</ul> 
+{%endfor%}
+{%endif%}
+{%if messages%}
+{%for message in messages%}
+{{message}}
+{%endfor%}
+{%endif%}
+               <div class="col-md-6 col-sm-6 col-xs-12">
+                <form class="form-horizontal" method="post">
+                 <div class="form-group ">
+                  <label class="control-label col-sm-2" for="CompanyName">
+                   Company Name
+                  </label>
+                  <div class="col-sm-10">
+                   {{form.name}}
+                  </div>
+                 </div>
+                     <div class="form-group ">
+                  <label class="control-label col-sm-2" for="Grade">
+                   For Batch
+                  </label>
+                  <div class="col-sm-10">
+                   {{form.for_batch}}
+                  </div>
+                 </div>
+                    <div class="form-group ">
+                  <label class="control-label col-sm-2" for="ctc">
+                   CTC
+                  </label>
+                  <div class="col-sm-10">
+                   {{form.ctc}}
+                  </div>
+                        <p class="small text-muted">Per Annum for Placement and Per Month for Internship.</p>
+                 </div>
+                 <div class="form-group ">
+                  <label class="control-label col-sm-2" for="Grade">
+                   Grade
+                  </label>
+                  <div class="col-sm-10">
+                   {{form.grade}}
+                  </div>
+                 </div>
+                 <div class="form-group ">
+                  <label class="control-label col-sm-2" for="Cut-Off">
+                   Cut-Off
+                  </label>
+                  <div class="col-sm-10">
+                   {{form.cutoff}}
+                  </div>
+                 </div>
+                 <div class="form-group ">
+                  <label class="control-label col-sm-2" >
+                   Branch Allowed
+                  </label>
+                  <div class="col-sm-10">
+                      <div class="row">
+                      {%for box in form.branch_allowed %}
+                      <div class="form-check form-check-inline">                          
+                              <div class="col-lg-2 col-md-3 col-sm-4">
+                          {{box.tag}}
+                          <label class="form-check-label" for="{{box.id_for_label}}">{{box.choice_label}}</label>
+                                  </div>                       
+                      </div>
+                      {%endfor%}
+                           </div>
+                  </div>
+                 </div>
+                 <div class="form-group ">
+                  <label class="control-label col-sm-2" for="BacklogsAllowed">
+                   Backlogs Allowed
+                  </label>
+                  <div class="col-sm-10">
+                   {{form.backlogs_allowed}}
+
+                      
+                  </div>
+                 </div>
+              <!--   <div class="form-group ">
+                  <label class="control-label col-sm-2" for="CompanyDetails">
+                   Company Details
+                  </label>
+                  <div class="col-sm-10">
+                   <textarea class="form-control" cols="40" id="CompanyDetails" name="CompanyDetails" placeholder="Company Details" rows="10"></textarea>
+                  </div>
+                 </div>-->
+                 <div class="form-group ">
+                  <label class="control-label col-sm-2" for="ClosingDate">
+                   Closing Date
+                  </label>
+                  <div class="col-sm-10 input-group datepicker" data-provide="datepicker">
+                   {{form.closing_date}}
+                  </div>
+                 </div>
+                      <div class="form-group ">
+                  <label class="control-label col-sm-2" for="cap">
+                   Cap
+                  </label>
+                  <div class="col-sm-10">
+                   {{form.cap}}
+                  </div>
+                 </div>
+                    <div class="form-group">
+                    <div class="col-sm-10">
+                        <p>Enter -1 if there is no cap.</p>
+                    </div>
+                </div>
+                         <div class="form-group ">
+                  <label class="control-label col-sm-2" for="open_reg">
+                   Registration Status
+                  </label>
+                  <div class="col-sm-10">
+                   {{form.open_reg}}
+                  </div>
+                 </div>
+                    {%csrf_token%}
+                 <div class="form-group">
+                  <div class="col-sm-10 col-sm-offset-2">
+                   <button class="btn btn-default " name="submit" type="submit">
+                    Submit
+                   </button>
+                  </div>
+                 </div>
+                </form>
+               </div>
+              </div>
+             </div>
+        </div>
+{%endblock%}

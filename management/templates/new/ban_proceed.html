@@ -1,0 +1,50 @@
+{% extends 'new/skeleton.html' %}
+
+{%block body%}
+<div class="container-fluid">
+    <div class="row">
+        {%for message in messages%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto">
+        
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+       
+            </div>
+        {%endfor%}
+
+        {%if form.errors%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">        
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 {{form.errors}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>       
+            </div>
+        {%endif%}
+
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">
+            <h4>Admin : </h4>
+            <form method="post">
+                {% for field in form %}
+                <div class="form-group">
+                        <div class="form-label-group">
+                            {%if field.name == 'field3'%} <h4><br /><br />Ban for a number of upcoming companies - </h4>{%endif%}
+                            {{field}}
+                            {%if field.name == 'field1'%} <p> Leave empty for ban for all time.</p>{%endif%}
+                             {%if field.name == 'field2'%} <p> Leave empty for ban on sitting in any company.</p>{%endif%}
+                            {%if field.name == 'field3'%} <p>If filling this field leave previous 2 empty.</p>{%endif%}
+                        </div>
+                    </div>
+                {%endfor%}
+                {%csrf_token%}
+                <button class="btn btn-primary btn-block" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}

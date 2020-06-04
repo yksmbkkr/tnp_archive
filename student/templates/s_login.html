@@ -1,0 +1,76 @@
+{%extends 'mdc.html'%}
+{%load static%}
+
+
+{%block body%}
+
+<div class="container">
+        <div class="section">
+            <div class="row  section-form">
+                {%if messages%}
+{%autoescape off%}
+<div class="col m6 offset-m3 s12 center-align">
+      {%for message in messages%}
+                    <div id="card-alert" class="card {{message.tags}}">
+                        <div class="card-content white-text">
+                            <p>{{message}}</p>
+                        </div>
+                    </div>
+     {%endfor%}
+                </div>
+{%endautoescape%}
+{%endif%}
+                {%if form.errors%}
+
+<div class="col m6 offset-m3 s12 center-align">
+                    <div id="card-alert" class="card red">
+                        <div class="card-content white-text">
+                            <p>Username Password didn't match.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+{%endif%}
+                <div class="col m6 offset-m3 s12 center-align">
+                    <div class="card card-panel">
+                        <div class="card-content">
+                            <div class="card-title"><h4 class="center-align cyan-text text-darken-4">Login</h4></div>
+                            <div class="row">
+                                <form id="login-form" class="col s12" method="post" action="{%url 'student:s_login'%}">
+                                    <div class="input-field col s12">
+                                      <input id="id_username" type="text" class="validate" name="username"> 
+                                        <label for="id_username">Roll Number</label>
+                                        <span class="helper-text">Case Sensitive Field - Use uppercase alphabets in roll number.</span>
+                                    </div>
+                                    <div class="input-field col s12">
+                                      <input id="id_password" type="password" class="validate" name="password"> 
+                                        <label for="id_password">Password</label>
+                                    </div>
+                                    {%csrf_token%}
+                                    <input type="hidden" name="next" value="{{ next }}" />
+                                    <div class="col s12">
+                                        <button class=" col s12 btn waves-effect waves-light z-depth-4" type="submit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="card-action">
+                            <div class="row">
+                                <div class="col s12 l6 pad-top" >
+                                    <a class=" col s12 btn waves-effect waves-light z-depth-4" href="{%url 'student:s_activation'%}">Activate</a>
+                                </div>
+                                <div class="col s12 l6 pad-top">
+                                    <a href="{%url 'student:s_forgot_pass'%}" class=" col s12 btn waves-effect waves-light z-depth-4">Forgot Password</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}

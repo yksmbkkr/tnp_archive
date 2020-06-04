@@ -1,0 +1,76 @@
+{%extends 'skeleton.html'%}
+
+{%block body%}
+<div class="bootstrap-iso">
+            <div class="container-fluid">
+                
+                      {%if form.errors%}
+{%for field in form%}
+<ul>
+    {%for error in field.errors%}
+    <li>{{field.name}} : {{error}}</li>
+    {%endfor%}
+</ul> 
+{%endfor%}
+{%endif%}
+{%if messages%}
+                <ul>
+{%for message in messages%}
+                    <li >{{message}}</li>
+{%endfor%}
+                    </ul>
+{%endif%}
+                
+              <div class="row">
+<div class="col-md-6 col-sm-6 col-xs-12">
+<form method="post" id="place_form" class="form-horizontal" data-rollno-url="{%url 'management:ajax_user'%}">
+    {% csrf_token %}
+    <div class="form-group ">
+                  <label class="control-label col-sm-2" for="Grade">
+                   Select Company
+                  </label>
+                  <div class="col-sm-10">
+                   {{form.cmpn}}
+                  </div>
+                 </div>
+    
+    <div class="form-group ">
+                  <label class="control-label col-sm-2" for="Grade">
+                   Select Students
+                  </label>
+                  <div class="col-sm-10">
+                   {{form.roll_no}}
+                  </div>
+                 </div>
+    <div class="form-group">
+                  <div class="col-sm-10 col-sm-offset-2">
+                   <button class="btn btn-primary btn-block " name="submit" type="submit">
+                    Submit
+                   </button>
+                  </div>
+                 </div>
+</form>
+    </div>
+
+                  </div>
+                </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_cmpn").change(function () {
+      var url = $("#place_form").attr("data-rollno-url");  // get the url of the `load_cities` view
+      var company = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+          data: {
+              'company': company      // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_roll_no").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+      });
+      
+  </script>
+{%endblock%}

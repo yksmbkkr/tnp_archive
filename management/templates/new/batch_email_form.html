@@ -1,0 +1,385 @@
+{% extends 'new/skeleton2.html' %}
+
+{%block head %}
+<style>
+    select {
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{%block body%}
+<div class="container-fluid">
+    <div class="row">
+        {%for message in messages%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto">
+        
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+       
+            </div>
+        {%endfor%}
+
+        {%if form.errors%}
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">        
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 {{form.errors}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>       
+            </div>
+        {%endif%}
+
+        <div class="col-md-10 col-sm-12 mr-auto ml-auto mt-4">
+            <div class="card shadow">
+                <div class="card-header py-3"><h4 class="m-0 font-weight-bold text-primary">Email :</h4></div>
+                <div class="card-body">
+                    <form method="post" id="email-form">
+
+                            <div class="form-group row">
+                                <label for="{{ form.subject.id_for_label }}" class="col-sm-2 col-form-label">{{ form.subject.label }}</label>
+                                <div class="col-sm-10">
+                                    {{ form.subject }}
+                                </div>
+                            </div>
+
+                        <hr>
+                        <h5>Body:</h5>
+                        <div class="px-2 py-2 border border-primary rounded my-3">
+                            <p>Dear Student,</p>
+                            <div class="form-group">
+                                {{ form.body }}
+                            </div>
+                            <p>Regards<br>TnP Team</p>
+                        </div>
+                        {% csrf_token %}
+                        <input class="btn btn-primary btn-block" type="submit" value="Continue"/>
+
+                    </form>
+                    <div class="form-group my-2" id="send-email-modal-btn-div">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form id="get_email_id_list_form" method="post">
+            {% for field in form2 %}
+                {{ field }}
+            {% endfor %}
+            {% csrf_token %}
+        </form>
+        <form id="send_mail_mailing_list" method="post">
+            {% for field in form3 %}
+                {{ field }}
+            {% endfor %}
+            {% csrf_token %}
+        </form>
+    </div>
+    <div id="selection-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="selection-modalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content py-2">
+          <div class="col-sm-10 ml-auto mr-auto">
+              <button class="btn btn-primary btn-block">Send branch wise</button>
+              <button class="btn btn-primary btn-block">Send company wise</button>
+              <button class="btn btn-primary btn-block">Send individually</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="select-form-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="select-form-modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content py-2">
+            <div class="modal-body">
+                <div class="col-sm-12 px-1">
+                    <div id="form-select-data-div"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+            </div>
+        </div>
+    </div>
+          
+    <div id="preview-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="preview-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content py-2">
+            <div class="modal-header">
+                <h5 class="modal-title">Email Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-sm-12 mx-2 my-2 px-2 py-2">
+                    <div id="preview-data-div"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row w-100">
+                    <div class="col-md-4 my-1"><button class="btn btn-info btn-block" onclick="get_email_select('branch')">Send Branch Wise</button></div>
+                    <div class="col-md-4 my-1"><button class="btn btn-info btn-block" onclick="get_email_select('company')">Send Company Wise</button></div>
+                    <div class="col-md-4 my-1"><button class="btn btn-info btn-block" onclick="get_email_select('individual')">Send Individually</button></div>
+                    <div class="col-md-8 my-1 ml-auto mr-auto"><button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Cancel</button></div>
+                </div>        
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div id="sendingMailModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="sendingMailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content py-2">
+            <div class="modal-body">
+                <div class="col-sm-12 px-1 text-center">
+                    <h4 class="text-info" id="sendingMailHeading">Sending mails...</h4>
+                </div>
+                <div class="col-sm-12 px-1 my-1 text-center">
+                    <span class="text-primary" id="sendingMailSpinner"><i class="fas fa-circle-notch fa-spin fa-7x"></i></span>
+                </div>
+                <div class="col-sm-12 px-1 my-1 text-center">
+                    <span class="text-danger" id="mailSentCountSpan"></span> sent out of <span class="text-success" id="mailTotalCountSpan"></span> .
+                </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{% block script %}
+    <script>
+        var globalSelectList = [];
+        var listType = '';
+        $(document).ready(function () {
+            $('#email-form').submit(function () {
+                get_email_preview();
+                return false;
+            });
+        });
+
+        function get_email_preview() {
+            $('#preview-data-div').empty();
+            let formObj = $('#email-form');
+            $.ajax({
+                data: formObj.serialize(),
+                type: formObj.attr('method'),
+                url: '{% url 'management:get_email_preview_ajax' %}',
+                success: function(data,status) {
+                    if (data.status == 200){
+                        $('#preview-data-div').append(data.html_data);
+                        $('#preview-modal').modal('toggle');
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function (data,status) {
+                    alert('Something went wrong.');
+                }
+            });
+        }
+
+        function get_email_select(flag_type){
+            globalSelectList.length = 0;
+            $('#send-email-modal-btn').remove();
+            $('#form-select-data-div').empty();
+            ajax_url = '{% url 'management:get_select_ajax' %}'+'?type='+flag_type;
+            $.get(ajax_url, function(data, status){
+                if (status == 'success'){
+                    if (data.status == 200){
+                        $('#form-select-data-div').append(data.html_data);
+                        $('#preview-modal').modal('toggle');
+                        $('#select-form-modal').modal('toggle');
+                        if(flag_type === 'individual'){
+                            $('.select2-batch-mail').select2({
+                                dropdownParent: $('#select-form-modal'),
+                                width : '100%',
+                                closeOnSelect: false,
+                            });
+                            $('.select2-batch-mail').on('select2:select', function (e) {
+                                let select_data = e.params.data;
+                                create_send_button(select_data,flag_type);
+                            });
+                            $('.select2-batch-mail').on('select2:unselect', function (e) {
+                                let select_data = e.params.data;
+                                create_send_button(select_data,flag_type);
+                            });
+                        } else {
+                            $('.select2-batch-mail').select2({
+                                dropdownParent: $('#select-form-modal'),
+                                width : '100%',
+                            });
+                            $('.select2-batch-mail').on('select2:closing', function (e) {
+                                let select_data = e.params.args.originalSelect2Event.data;
+                                create_send_button(select_data,flag_type);
+                            });
+                        }
+
+                    } else {
+                        alert(data.msg);
+                    }
+                } else {
+                    alert('Something went wrong !')
+                }
+            });
+        }
+        function create_send_button(data,flag_type){
+            if(flag_type == 'branch' || flag_type == 'company'){
+                globalSelectList.length =0;
+            }
+            listType = flag_type;
+            if(data.selected){
+                globalSelectList.push(data.id);
+            } else {
+                var idx = globalSelectList.indexOf(data.id);
+                if (idx > -1) {
+                  globalSelectList.splice(idx, 1);
+                }
+            }
+            if (globalSelectList.length > 0){
+                $('#send-email-modal-btn').remove();
+                $('#send-email-modal-btn-div').append('<button id="send-email-modal-btn" class="btn btn-success btn-block" onclick="final_send_mail()">Send</button>')
+            } else {
+                $('#send-email-modal-btn').remove();
+            }
+            console.log(globalSelectList);
+        }
+        
+        function final_send_mail() {
+            if (globalSelectList.length < 1 || listType == ''){
+                alert("Invalid Request");
+                return;
+            }
+            let msg = "";
+            let email_count = 0;
+
+            if (listType == 'branch' || listType == 'company' || listType == 'individual'){
+                let jsonObj = {
+                    "flag_type" : listType,
+                    "id_list" : globalSelectList,
+                };
+
+                document.getElementById('{{ form2.json_data_field.id_for_label }}').value = JSON.stringify(jsonObj);
+
+                let ajax_url = '{% url 'management:batch_email_get_email_ajax' %}';
+                let formObj = $('#get_email_id_list_form');
+                $.ajax({
+                    data: formObj.serialize(),
+                    type: formObj.attr('method'),
+                    url: ajax_url,
+                    success: function(data,status) {
+                        if (data.status == 200){
+                            let mailing_list = data.e_list;
+                            send_mail_boto_call(mailing_list);
+                        } else {
+                            alert(data.msg);
+                        }
+                    },
+                    error: function (data,status) {
+                        alert('Something went wrong.');
+                    }
+                });
+                
+            }
+            else {
+                alert('Invalid Request');
+                return;
+            }
+        }
+
+        function send_mail_boto_call(mailing_list){
+            console.log(mailing_list);
+            let total_count = mailing_list.length;
+            let current_count = 0;
+            let reg_list = mailing_list;
+            document.getElementById('mailSentCountSpan').innerText = current_count;
+            document.getElementById('mailTotalCountSpan').innerText = total_count;
+            $('#sendingMailModal').modal('toggle');
+            let ajax_counter = 0;
+            let len_limit = 10;
+            let total = total_count;
+            let k = Math.floor(total/len_limit);
+            let remainder = total%len_limit;
+            let startIdx = 0;
+            let endIdx = 0;
+            for(let i=0; i<k; i++){
+                        startIdx = endIdx;
+                        endIdx = endIdx + len_limit;
+                        let reg_list_slice = reg_list.slice(startIdx,endIdx);
+                        let e_json_obj = {
+                            'flag_type' : 'send',
+                            'id_list' : reg_list_slice,
+                            'e_sub' : document.getElementById('{{ form.subject.id_for_label }}').value,
+                            'e_body' : document.getElementById('{{ form.body.id_for_label }}').value
+                        };
+                        document.getElementById('{{ form3.json_data.id_for_label }}').value = JSON.stringify(e_json_obj);
+                        console.log(document.getElementById('{{ form3.json_data.id_for_label }}').value);
+                        let formObj = $('#send_mail_mailing_list');
+                        $.ajax({
+                            beforeSend : function(){
+                              ajax_counter+=1;
+                            },
+                            complete : function(){
+                              ajax_counter-=1;
+                              if (ajax_counter == 0 && remainder == 0){
+                                    document.getElementById('sendingMailSpinner').innerHTML = '<i class="text-success far fa-check-circle 7x"></i>'
+                              }
+                            },
+                            data: formObj.serialize(),
+                            type: formObj.attr('method'),
+                            url: '{% url 'management:email_boto_call_ajax' %}',
+                            success: function(data,status) {
+                                if (data.status == 200){
+                                    document.getElementById('mailSentCountSpan').innerText = parseInt(document.getElementById('mailSentCountSpan').innerText)+10;
+                                    console.log(data.ses_response)
+                                } else {
+                                    alert(data.msg);
+                                }
+
+                            },
+                            error: function (data,status) {
+                                alert('Something went wrong.');
+                            }
+
+                        });
+                    }
+            if (total-endIdx > 0){
+                        let reg_list_slice = reg_list.slice(endIdx,total);
+                        let e_json_obj = {
+                            'flag_type' : 'send',
+                            'id_list' : reg_list_slice,
+                            'e_sub' : document.getElementById('{{ form.subject.id_for_label }}').value,
+                            'e_body' : document.getElementById('{{ form.body.id_for_label }}').value
+                        };
+                        document.getElementById('{{ form3.json_data.id_for_label }}').value = JSON.stringify(e_json_obj);
+                        let formObj = $('#send_mail_mailing_list');
+                        $.ajax({
+                            data: formObj.serialize(),
+                            type: formObj.attr('method'),
+                            url: '{% url 'management:email_boto_call_ajax' %}',
+                            success: function(data,status) {
+                                if (data.status == 200) {
+                                    document.getElementById('mailSentCountSpan').innerText = total_count;
+                                    document.getElementById('sendingMailSpinner').innerHTML = '<i class="text-success far fa-check-circle fa-7x"></i>'
+
+                                    console.log(data.ses_response)
+                                } else {
+                                    alert(data.msg);
+                                }
+                            },
+                            error: function(data,status) {
+                                alert('Something went wrong.');
+                            }
+                        });
+                    }
+        }
+    </script>
+{% endblock %}

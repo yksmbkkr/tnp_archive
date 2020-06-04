@@ -1,0 +1,35 @@
+                                         {%for c in reg_obj_list%}
+                                        <tr>
+                                              <th>{{c.user.student_profile.f_name}}&nbsp;{{c.user.student_profile.l_name}}</th>
+                                                <td >{{c.user.username}}</td>
+                                                 <td>{{c.user.student_profile.batch.name}}</td>
+                                                <td>{{c.user.student_profile.branch}}</td>
+                                                 <td>{{c.company.name}}</td>
+                                                <td>{{c.placed|yesno:"Yes,No"}}</td>
+                                               <td>{{c.user.student_profile.user.email}}</td>
+                                                <td>{{c.user.student_profile.mobile}}</td>
+                                                <td>{{c.user.student_profile.alternate_mobile}}</td>
+                                                <td>{{c.user.student_profile.be_marks}}</td>
+                                                <td>{{c.user.student_profile.cgpa_drop}}</td>
+                                                <td>{{c.user.student_profile.sem1}}</td>
+                                                <td>{{c.user.student_profile.sem2}}</td>
+                                                <td>{{c.user.student_profile.sem3}}</td>
+                                                <td>{{c.user.student_profile.sem4}}</td>
+                                                <td>{{c.user.student_profile.sem5}}</td>
+                                                <td>{{c.user.student_profile.sem6}}</td>
+                                                <td>{{c.user.student_profile.backlogs}}</td>
+                                                <td>{{c.user.student_profile.marks_12}}</td>
+                                                <td>{{c.user.student_profile.passing_year_12}}</td>
+                                                <td>{{c.user.student_profile.marks_11}}</td>
+                                                <td>{{c.user.student_profile.passing_year_10}}</td>
+                                                <td>{{c.user.student_profile.intern_company}}</td>
+                                                <td>{{c.user.student_profile.gender}}</td>
+                                                <td>{{c.user.student_profile.category}}</td>
+                                                <td>{{c.user.student_profile.father}}</td>
+                                                <td>{{c.user.student_profile.father_occupation}}</td>
+                                                <td>{{c.user.student_profile.mother}}</td>
+                                                <td>{{c.user.student_profile.mother_occupation}}</td>
+                                                <td>{{c.user.student_profile.address}}</td>
+                                                <td>{{c.user.student_profile.permanent_address}}</td>
+                                        </tr>
+                                        {% endfor %}

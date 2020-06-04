@@ -1,0 +1,38 @@
+{%extends 'skeleton.html'%}
+
+{%block head%}
+    <head>
+        {%include 'head.html'%}
+        {%include 'login_head.html'%}
+    </head>
+{%endblock%}
+{%block body%}
+{%include 'err_msg.html'%}
+
+<form id="login-form" class="form-horizontal login-box" method="post" >
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">Old Password</label>
+                <div class="col-sm-10"> 
+                  {{form.old_password}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="id-new_password1" class="col-sm-4 control-label">Password</label>
+                <div class="col-sm-10">
+                 {{form.new_password1}}
+                </div>
+              </div>
+    <div class="form-group">
+                <label for="id-new_password2" class="col-sm-4 control-label">Retype Password</label>
+                <div class="col-sm-10">
+                  {{form.new_password2}}
+                </div>
+              </div>
+    {%csrf_token%}
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Submit</button>
+                </div>
+              </div>
+            </form>
+{%endblock%}

@@ -1,0 +1,77 @@
+{%extends 'skeleton.html'%}
+
+{%block head%}
+{%include 'head.html'%}
+{%include 'search_company_head.html'%} 
+{%endblock%}
+
+
+{%block body%}
+
+<div class="bootstrap-iso">
+         <div class="container-fluid">
+          <div class="row">
+           <div class="col-md-6 col-sm-6 col-xs-12">
+               {%if form.errors%}
+{%for field in form%}
+<ul>
+    {%for error in field.errors%}
+    <li>{{field.name}} : {{error}}</li>
+    {%endfor%}
+</ul>
+{%endfor%}
+{%endif%}
+          <form method="post" enctype="multipart/form-data" name="myfile">
+    {% csrf_token %}
+    {{form.myfile}}
+    <button type="submit">Upload</button>
+  </form>
+               
+                   {%if messages%}
+               
+{%for message in messages%}
+<h3 class="title">{{message}}</h3>
+{%endfor%}
+
+{%endif%}
+               
+           </div>
+          
+             {%if slist%}
+            
+                <div class="col-md-10 ml-2">
+                    
+
+        <div>
+           
+            <table id="query-table" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Roll Number</th>
+                        <th scope="col">Exception</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for c in slist%}
+                    <tr>
+                        <th scope="row">{{c.rollno}}</th>
+                        <td >{{c.exception}}</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+
+</div>
+                    
+
+
+                </div>
+             
+            </div>
+             {%endif%}
+         </div>
+        </div>
+
+
+{%endblock%}
